@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="main">
+    <header>
+        <div>Tic Tac Toe</div>
+        <button id="new-game">New Game</button>
+    </header>
+    <div id="body">
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+        <div class="box"> </div>
+    </div>
+    <footer>
+        <a href="">rules</a>
+        <a href="">credits</a>
+    </footer>
+</div>
+
+<script>
+    function emptyCheck(box) {
+        if (box.textContent == "X" || box.textContent == "O") {return false}
+        else {
+            game.turn += 1;
+            return true;
+        };
+    };
+
+    let game = {
+        turn: 0,
+
+        click(box) {
+            if ((game.turn%2) == 0 && emptyCheck(box)) {box.textContent = player1.mark;};
+            if ((game.turn%2) == 1 && emptyCheck(box)) {box.textContent = player2.mark;};
+        },
+    };
+
+    let player1 = Object.assign({
+        mark: "X", 
+    }, game);
+
+    let player2 = Object.assign({
+        mark: "O", 
+    }, game);
+
+    var boxes = document.getElementsByClassName("box");
+    for (let i = 0; i < 9; i++) {
+        boxes[i].addEventListener("click", function() {
+            game.click(boxes[i]);
+        });
+    }
+    var newGame = document.getElementById("new-game");
+    newGame.addEventListener("click", () => {
+        location.reload();
+    })
+</script>
+</body>
+</html>
