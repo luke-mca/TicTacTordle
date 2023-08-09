@@ -10,6 +10,7 @@
 <div id="main">
     <header>
         <div>Tic Tac Toe</div>
+        <div id="turn"></div>
         <button id="new-game">New Game</button>
     </header>
     <div id="body">
@@ -38,27 +39,73 @@
         };
     };
 
+    let turnDisplay = document.getElementById("turn");
+    turnDisplay.textContent = "Player 1 Turn (X)";
+
     let game = {
+        board: [["", "", ""],["", "", ""],["", "", ""]],
+
         turn: 0,
 
-        click(box) {
-            if ((game.turn%2) == 0 && emptyCheck(box)) {box.textContent = player1.mark;};
-            if ((game.turn%2) == 1 && emptyCheck(box)) {box.textContent = player2.mark;};
+        click(box, i) {
+            if ((game.turn%2) == 0 && emptyCheck(box)) {
+                box.textContent = player1.mark;
+                turnDisplay.textContent = "Player 2 Turn (O)";
+                game.board[i%3][Math.floor(i/3)] = player1.mark;
+                game.winCheck(player1.mark);
+            };
+            if ((game.turn%2) == 1 && emptyCheck(box)) {
+                box.textContent = player2.mark;
+                turnDisplay.textContent = "Player 1 Turn (X)";
+                game.board[i%3][Math.floor(i/3)] = player2.mark;
+                game.winCheck(player2.mark);
+            };       
         },
+
+        winCheck(mark) {
+            if (game.turn < 4) return false;
+            if (game.board[0][0] == mark && game.board[0][1] == mark && game.board[0][2] == mark) {game.win(mark)}
+            else if (game.board[1][0] == mark && game.board[1][1] == mark && game.board[1][2] == mark) {game.win(mark)}
+            else if (game.board[2][0] == mark && game.board[2][1] == mark && game.board[2][2] == mark) {game.win(mark)}
+            else if (game.board[0][0] == mark && game.board[1][0] == mark && game.board[2][0] == mark) {game.win(mark)}
+            else if (game.board[0][1] == mark && game.board[1][1] == mark && game.board[2][1] == mark) {game.win(mark)}
+            else if (game.board[0][2] == mark && game.board[1][2] == mark && game.board[2][2] == mark) {game.win(mark)}
+            else if (game.board[0][0] == mark && game.board[1][1] == mark && game.board[2][2] == mark) {game.win(mark)}
+            else if (game.board[0][2] == mark && game.board[1][1] == mark && game.board[2][0] == mark) {game.win(mark)}
+            else if (game.turn == 9) {game.win("tie")}
+        },
+
+        win(player) {
+            game.click = null;
+            let body = document.getElementById("body");
+            let winDisplay = document.createElement("div");
+            winDisplay.setAttribute("id", "win");
+            if (player != "tie") {winDisplay.textContent = (player+" WINS")}
+            else {winDisplay.textContent = ("Tie Game")}
+            let viewBoard = document.createElement("button");
+            viewBoard.textContent = "View Board";
+            viewBoard.addEventListener("click", () => {
+                winDisplay.remove();
+            })
+            winDisplay.appendChild(viewBoard);
+            body.appendChild(winDisplay);
+        }
     };
 
     let player1 = Object.assign({
         mark: "X", 
+        wins: 0,
     }, game);
 
     let player2 = Object.assign({
         mark: "O", 
+        wins: 0,
     }, game);
 
     var boxes = document.getElementsByClassName("box");
     for (let i = 0; i < 9; i++) {
         boxes[i].addEventListener("click", function() {
-            game.click(boxes[i]);
+            game.click(boxes[i], i);
         });
     }
     var newGame = document.getElementById("new-game");
