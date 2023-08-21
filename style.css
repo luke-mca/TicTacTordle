@@ -54,7 +54,7 @@ header>button {
     align-items: center;
 }
 
-footer {
+/* footer {
     background-color: white;
     display: flex;
     flex-direction: row;
@@ -65,7 +65,7 @@ footer {
     position: fixed;
     bottom: 0px;
     width: 100%;
-}
+} */
 a {
     text-decoration: none;
     color: black;
@@ -164,7 +164,7 @@ button:active {
     margin-bottom: 60px;
     flex: 1;
     display: grid;
-    grid:  2fr repeat(3, 1fr) / 1fr;
+    grid:  repeat(4, 1fr) / 1fr;
     gap: 2px;
 }
 #keys>.row {
