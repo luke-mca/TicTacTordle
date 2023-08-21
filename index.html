@@ -85,8 +85,8 @@
         </div>
     </div>
     <footer>
-        <a href="">rules</a>
-        <a href="">credits</a>
+        <a href="">idk</a>
+        <a href="">idk</a>
     </footer>
 </div>
 
@@ -198,14 +198,24 @@
 
         updateBoxes() {
             let tempEnteredWord = "";
+            let rows = document.getElementsByClassName("row");
             for (let p=0; p<5; p++) {
                 tempEnteredWord += inputKids[p].value;
+                //change color of boxes
+                for (let i=0; i<3; i++) {
+                    let row = rows[i];
+                    for (let j=1; j<row.childNodes.length; j += 2) {
+                        if ((inputKids[p].value).toLowerCase() == (row.childNodes[j].innerHTML).toLowerCase()) {
+                            row.childNodes[j].style.backgroundColor = "var(--darkgray)";
+                            row.childNodes[j].style.color = "white";
+                        }
+                    }
+                }
             };
             enteredWord = tempEnteredWord.toLowerCase();
             if (!wordCheck(enteredWord)) {
                 return false;
             }
-            console.log(enteredWord);
             let wordles = document.getElementsByClassName("wordle");
             let words = document.getElementsByClassName(wordleGame.rowNum[wordleGame.currentGuess]);
             for (let i=0; i<9; i++) {
