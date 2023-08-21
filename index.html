@@ -9,8 +9,8 @@
 <body>
 <div id="main">
     <header>
-        <div>Tic Tac Toe</div>
-        <div id="turn"></div>
+        <div id="title">TIC TAC TORDLE</div>
+        <div id="turn-counter">turn counter</div>
         <button id="new-game">New Game</button>
     </header>
     <div id="body">
@@ -43,7 +43,13 @@
         </div>
     </div>
     <div id="keys">
-        <input type="text" id="word">
+        <div id="input-box">
+            <input type="text" class="input" maxlength="1">
+            <input type="text" class="input" maxlength="1">
+            <input type="text" class="input" maxlength="1">
+            <input type="text" class="input" maxlength="1">
+            <input type="text" class="input" maxlength="1">
+        </div>
         <div class="row">
             <button>Q</button>
             <button>W</button>
@@ -85,38 +91,33 @@
     </footer>
 </div>
 
+<script src="script.js"></script>
 <script>
     function emptyCheck(box) {
         if (box.textContent == "X" || box.textContent == "O") {return false}
         else {
-            game.turn += 1;
             return true;
         };
     };
 
-    let turnDisplay = document.getElementById("turn");
-    turnDisplay.textContent = "Player 1 Turn (X)";
-
     let game = {
         board: [["", "", ""],["", "", ""],["", "", ""]],
 
-        words: [["SLATE", "SLATE", "LUCAS"],["WORDY", "SLATE", "SLATE"],["SLATE", "LEAST", "JELLO"]],
+        words: [[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()]],
 
         turn: 0,
 
         click(box, i) {
             if ((game.turn%2) == 0 && emptyCheck(box)) {
-                box.textContent = player1.mark;
-                turnDisplay.textContent = "Player 2 Turn (O)";
-                game.board[i%3][Math.floor(i/3)] = player1.mark;
+                box.parentElement.style.backgroundColor = "var(--red)";
+                game.board[Math.floor(i/3)][Math.floor(i%3)] = player1.mark;
                 game.winCheck(player1.mark);
             };
             if ((game.turn%2) == 1 && emptyCheck(box)) {
-                box.textContent = player2.mark;
-                turnDisplay.textContent = "Player 1 Turn (X)";
-                game.board[i%3][Math.floor(i/3)] = player2.mark;
+                box.parentElement.style.backgroundColor = "var(--blue)";
+                game.board[Math.floor(i/3)][Math.floor(i%3)] = player2.mark;
                 game.winCheck(player2.mark);
-            };       
+            };     
         },
 
         winCheck(mark) {
@@ -167,7 +168,7 @@
     let boxes = document.getElementsByClassName("wordle");
     for (let i = 0; i < 9; i++) {
         row = document.createElement("div");
-        row.setAttribute("class", "word row1");
+        row.setAttribute("class", "word a");
         for (let j=0; j<5; j++) {
             letter = document.createElement("div");
             letter.setAttribute("maxlength", "1");
@@ -181,34 +182,139 @@
         location.reload();
     })
 
-    // let keys = document.getElementsByClassName("row");
-    // for(i=0; i<3; i++) {
-    //     for(j=1; j<keys[i].childNodes.length;j+=2) {
-    //         keys[i].childNodes[j].setAttribute("onclick", "input(this)")
-    //     };
-    // };
-
-    let input = document.getElementById("word");
-    let words = document.getElementsByClassName("row1");
+    
+    let inputKids = document.getElementsByClassName("input");
     let wordleGame = {
         guesses: [""],
         
-        rowNum: 0,
+        rowNum: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+        currentGuess: 0,
+
+        clearInput() {
+            for(let j=0; j<5; j++) {
+                inputKids[j].value = "";
+            }
+            inputKids[0].focus();
+        },
 
         updateBoxes() {
-            for (let i=0; i<9; i++) {
-                for(let j=0; j<5; j++) {
-                    let word = Array.from(input.value);
-                    words[i].childNodes[j].innerHTML = word[j];
-                }
+            let enteredWord = "";
+            for (let p=0; p<5; p++) {
+                enteredWord += inputKids[p].value;
+            };
+            if (!wordCheck(enteredWord)) {
+                return false;
             }
-            wordleGame.rowNum += 1;
+            let wordles = document.getElementsByClassName("wordle");
+            let words = document.getElementsByClassName(wordleGame.rowNum[wordleGame.currentGuess]);
+            for (let i=0; i<9; i++) {
+                let tempWord = game.words[Math.floor(i/3)][Math.floor(i%3)];
+                let correctCounter = 0;
+                for(let j=0; j<5; j++) {
+                    words[i].childNodes[j].innerHTML = inputKids[j].value;
+                    words[i].childNodes[j].setAttribute("class","letter guessed")
+                    if (tempWord[j] == (inputKids[j].value).toLowerCase()) {
+                        words[i].childNodes[j].style.backgroundColor = "green";
+                        correctCounter += 1;
+                    }
+                    else {
+                        for (let k=0; k<5; k++) {
+                            if (k != j) {
+                                if (tempWord[k] == (inputKids[j].value).toLowerCase()) {
+                                    words[i].childNodes[j].style.backgroundColor = "orange";
+                                }
+                            };
+                        }
+                    }
+                }
+                if (correctCounter == 5) {
+                    game.click(wordles[i], i)
+                }
+                correctCounter = 0;
+            }
+            wordleGame.currentGuess += 1;
+            let rowID = wordleGame.rowNum[wordleGame.currentGuess];
+            for (i=0; i<9; i++) {
+                let word = document.createElement("div");
+                word.setAttribute("class", "word "+rowID);
+                for (j=0; j<5; j++) {
+                    let letter = document.createElement("div");
+                    letter.setAttribute("class", "letter");
+                    letter.setAttribute("maxlength", "1");
+                    word.appendChild(letter);
+                }
+                wordles[i].appendChild(word);
+            }
+            wordleGame.clearInput();
+            game.turn += 1;
         },
     }
     let enter = document.getElementById("enter");
     enter.addEventListener("click", () => {
         wordleGame.updateBoxes();
     })
+    
+    for (let i=0; i<4;i++) {
+        inputKids[i].addEventListener("keyup" , () => {
+            if (event.key == "Enter") {return false};
+            if (event.key == "Backspace") {return false};
+            if (event.key == "Tab") {return false};
+            let tempNum = inputKids[i].value.charCodeAt(0);
+            if ((tempNum < 91 & tempNum > 64) || (tempNum < 123 & tempNum > 96)) {
+                inputKids[i+1].focus();
+            }
+        })
+    }
+    for (let i=0; i<5;i++) {
+        inputKids[i].addEventListener("keyup" , () => {
+            if (event.key == "Enter") {wordleGame.updateBoxes()};
+        })
+    }
+    for (let i=1; i<5;i++) {
+        inputKids[i].addEventListener("keydown" , () => {
+            if (event.key == "Backspace") {
+                if (inputKids[i].value == "") {
+                    inputKids[i-1].focus();
+                }
+            }
+        })
+    }
+    inputKids[4].addEventListener("keydown" , () => {
+        if (event.key == "Backspace" && inputKids[4].value == "") {
+            inputKids[3].focus();
+        }
+    })
+
+    let keyParents = document.getElementsByClassName("row");
+    for (let i=0; i<3; i++) {
+        let row = keyParents[i].childNodes;
+        for(let j=1; j<row.length; j += 2) {
+            row[j].addEventListener("click", () => {
+                var letterBox;
+                var letterBoxNum;
+                for (let k=0; k<5; k++) {
+                    if (inputKids[k].value == "") {
+                        letterBox = inputKids[k];
+                        letterBoxNum = k;
+                        k += 5;
+                    }
+                    else {letterBoxNum = 5};
+                }
+                if (i==2 && j==1) {
+                    wordleGame.updateBoxes();
+                }
+                if (i==2 && j==17) {
+                    console.log(inputKids[letterBoxNum-1]);
+                    inputKids[letterBoxNum-1].value = "";
+                }
+                else {
+                    if (letterBox != undefined) {letterBox.value = row[j].innerHTML};
+                };
+            });
+        }
+    }
+
+    console.log(game.words);
 </script>
 </body>
 </html>
