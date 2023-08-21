@@ -10,7 +10,6 @@
 <div id="main">
     <header>
         <div id="title">TIC TAC TORDLE</div>
-        <div id="turn-counter">turn counter</div>
         <button id="new-game">New Game</button>
     </header>
     <div id="body">
@@ -93,6 +92,10 @@
 
 <script src="script.js"></script>
 <script>
+    let inputBox = document.getElementById("input-box");
+    let inputKids = document.getElementsByClassName("input");
+    inputKids[0].focus();
+
     function emptyCheck(box) {
         if (box.textContent == "X" || box.textContent == "O") {return false}
         else {
@@ -138,30 +141,30 @@
             let main = document.getElementById("main");
             let winDisplay = document.createElement("div");
             winDisplay.setAttribute("id", "win");
-            if (player != "tie") {winDisplay.textContent = (player+" WINS")}
-            else {winDisplay.textContent = ("Tie Game")}
+            if (player == "tie") {winDisplay.textContent = ("Tie Game")}
+            if (player == "X") {
+                winDisplay.textContent = "Red Wins!";
+                winDisplay.style.backgroundColor = "var(--red)";
+            }
+            if (player == "O") {
+                winDisplay.textContent = "Blue Wins!";
+                winDisplay.style.backgroundColor = "var(--blue)";
+            }
             if (player == "X") {player1.wins += 1};
             if (player == "O") {player2.wins += 1};
-            let viewBoard = document.createElement("button");
-            viewBoard.textContent = "X";
-            viewBoard.addEventListener("click", () => {
-                winDisplay.remove();
-            })
-            let winCounter = document.createElement("div");
-            winCounter.textContent = ("X Wins: "+player1.wins + "\n" + "O Wins: "+player2.wins);
-            winDisplay.appendChild(winCounter);
-            winDisplay.appendChild(viewBoard);
             main.appendChild(winDisplay);
         }
     };
 
     let player1 = Object.assign({
         mark: "X", 
+        color: "red",
         wins: 0,
     }, game);
 
     let player2 = Object.assign({
         mark: "O", 
+        color: "blue",
         wins: 0,
     }, game);
     
@@ -182,12 +185,10 @@
         location.reload();
     })
 
-    
-    let inputKids = document.getElementsByClassName("input");
     let wordleGame = {
         guesses: [""],
         
-        rowNum: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+        rowNum: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
         currentGuess: 0,
 
         clearInput() {
@@ -198,13 +199,15 @@
         },
 
         updateBoxes() {
-            let enteredWord = "";
+            let tempEnteredWord = "";
             for (let p=0; p<5; p++) {
-                enteredWord += inputKids[p].value;
+                tempEnteredWord += inputKids[p].value;
             };
+            enteredWord = tempEnteredWord.toLowerCase();
             if (!wordCheck(enteredWord)) {
                 return false;
             }
+            console.log(enteredWord);
             let wordles = document.getElementsByClassName("wordle");
             let words = document.getElementsByClassName(wordleGame.rowNum[wordleGame.currentGuess]);
             for (let i=0; i<9; i++) {
@@ -243,12 +246,21 @@
                     letter.setAttribute("maxlength", "1");
                     word.appendChild(letter);
                 }
-                wordles[i].appendChild(word);
+                wordles[i].insertBefore(word, wordles[i].firstChild);
             }
             wordleGame.clearInput();
             game.turn += 1;
+            if (game.turn%2 == 0) {inputBox.style.border = "4px solid var(--red)"}
+            else {inputBox.style.border = "4px solid var(--blue)"};
         },
     }
+
+    if ((Math.random()*2) > 1 ) {
+        inputBox.style.border = "4px solid var(--blue)";
+        game.turn += 1;
+    };
+
+    //KEYBOARD
     let enter = document.getElementById("enter");
     enter.addEventListener("click", () => {
         wordleGame.updateBoxes();
@@ -303,9 +315,8 @@
                 if (i==2 && j==1) {
                     wordleGame.updateBoxes();
                 }
-                if (i==2 && j==17) {
-                    console.log(inputKids[letterBoxNum-1]);
-                    inputKids[letterBoxNum-1].value = "";
+                else if (i==2 && j==17) {
+                    if (inputKids[letterBoxNum-1] != undefined) {inputKids[letterBoxNum-1].value = ""};
                 }
                 else {
                     if (letterBox != undefined) {letterBox.value = row[j].innerHTML};
@@ -313,8 +324,6 @@
             });
         }
     }
-
-    console.log(game.words);
 </script>
 </body>
 </html>

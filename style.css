@@ -38,8 +38,8 @@ header>button {
 #body {
     align-self: center;
     margin-top: 50px;
-    width: 62vh;
-    height: 62vh;
+    width: min(62vh, 95vw);
+    height: min(62vh, 95vw);
     display: grid;
     grid: repeat(3, 1fr) / repeat(3, 1fr);
     gap:2px;
@@ -61,7 +61,7 @@ footer {
     justify-content: space-around;
     text-decoration: none;
     padding: 12px;
-    border-top: 2px solid black;
+    border-top: 2px solid var(--darkgray);
     position: fixed;
     bottom: 0px;
     width: 100%;
@@ -122,7 +122,7 @@ button:active {
     height: 100%;
     display: flex;
     background-color: white;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: stretch;
     align-items: stretch;
     overflow-y: scroll;
@@ -131,22 +131,23 @@ button:active {
 }
 
 .word {
-    margin-top: 6px;
+    margin-top: 8px;
     gap: 4px;
     width: 100%;
     height: 17%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: flex-end;
 }
 .letter {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 27px;
-    height: 27px;
+    width: min(4.5vw, 2.5vh);
+    height: min(4.5vw, 2.5vh);
     border: none;
-    font-size: 20px;
+    font-size: min(3.5vw, 2vh);
     font-weight:bold ;
     background-color: white;
     border: 1px solid var(--darkgray);
@@ -163,13 +164,14 @@ button:active {
     margin-bottom: 60px;
     flex: 1;
     display: grid;
-    grid: repeat(3, 1fr) / 1fr;
+    grid:  2fr repeat(3, 1fr) / 1fr;
     gap: 2px;
 }
 #keys>.row {
     flex: 1;
     display: flex;
     justify-content: center;
+    width: 95vw;
 }
 .row>button {
     background-color: var(--gray);
@@ -190,7 +192,12 @@ button:active {
 #keys>#input-box {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 4px;
+    border: solid 4px var(--red);
+    margin: auto;
+    padding: 5px;
+    border-radius: 4px;
 }
 #keys>#input-box>.input {
     width: 40px;
