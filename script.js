@@ -8,8 +8,17 @@ function randomWord() {
     return word;
 };
 
+let inputBox = document.getElementById("input-box");
+let check = 1;
 function wordCheck(word) {
     for(let i=0;i<wordleGuesses.length; i++) {
-        if(word == wordleGuesses[i]) {return true};
+        if(word == wordleGuesses[i]) {
+            return true
+            check = 0;
+        }
     };
+    if (check == 1) {
+        inputBox.setAttribute("class", "wrong");
+        setTimeout(() => {inputBox.setAttribute("class", "")}, 200);
+    }
 };

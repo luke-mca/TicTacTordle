@@ -43,11 +43,11 @@
     </div>
     <div id="keys">
         <div id="input-box">
-            <input type="text" class="input" maxlength="1" readonly>
-            <input type="text" class="input" maxlength="1" readonly>
-            <input type="text" class="input" maxlength="1" readonly>
-            <input type="text" class="input" maxlength="1" readonly>
-            <input type="text" class="input" maxlength="1" readonly>
+            <input type="text" class="input" maxlength="1" inputmode="none">
+            <input type="text" class="input" maxlength="1" inputmode="none">
+            <input type="text" class="input" maxlength="1" inputmode="none">
+            <input type="text" class="input" maxlength="1" inputmode="none">
+            <input type="text" class="input" maxlength="1" inputmode="none">
         </div>
         <div class="row">
             <button>Q</button>
@@ -84,15 +84,10 @@
             <button class="spec-key">bak</button>
         </div>
     </div>
-    <!-- <footer>
-        <a href="">idk</a>
-        <a href="">idk</a>
-    </footer> -->
 </div>
 
 <script src="script.js"></script>
 <script>
-    let inputBox = document.getElementById("input-box");
     let inputKids = document.getElementsByClassName("input");
     inputKids[0].focus();
 
@@ -201,7 +196,13 @@
             let rows = document.getElementsByClassName("row");
             for (let p=0; p<5; p++) {
                 tempEnteredWord += inputKids[p].value;
-                //change color of boxes
+            };
+            enteredWord = tempEnteredWord.toLowerCase();
+            if (!wordCheck(enteredWord)) {
+                return false;
+            }
+            //change color of boxes
+            for (let p=0; p<5; p++) {
                 for (let i=0; i<3; i++) {
                     let row = rows[i];
                     for (let j=1; j<row.childNodes.length; j += 2) {
@@ -212,10 +213,6 @@
                     }
                 }
             };
-            enteredWord = tempEnteredWord.toLowerCase();
-            if (!wordCheck(enteredWord)) {
-                return false;
-            }
             let wordles = document.getElementsByClassName("wordle");
             let words = document.getElementsByClassName(wordleGame.rowNum[wordleGame.currentGuess]);
             for (let i=0; i<9; i++) {
@@ -226,12 +223,14 @@
                     words[i].childNodes[j].setAttribute("class","letter guessed")
                     if (tempWord[j] == (inputKids[j].value).toLowerCase()) {
                         words[i].childNodes[j].style.backgroundColor = "green";
+                        tempWord = tempWord.substring(0, j) + "." + tempWord.substring(j+1);
                         correctCounter += 1;
                     }
                     else {
                         for (let k=0; k<5; k++) {
                             if (k != j) {
                                 if (tempWord[k] == (inputKids[j].value).toLowerCase()) {
+                                    tempWord = tempWord.substring(0, k) + "." + tempWord.substring(k+1);
                                     words[i].childNodes[j].style.backgroundColor = "orange";
                                 }
                             };
@@ -252,7 +251,6 @@
                     let letter = document.createElement("div");
                     letter.setAttribute("class", "letter");
                     letter.setAttribute("maxlength", "1");
-                    letter.setAttribute("readonly", "true");
                     word.appendChild(letter);
                 }
                 wordles[i].insertBefore(word, wordles[i].firstChild);

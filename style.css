@@ -30,7 +30,8 @@ header {
     font-weight: bolder;
 }
 header>button {
-    margin-right: 20px;
+    position: relative;
+    right: 20px;
 }
 
 #body {
@@ -52,18 +53,6 @@ header>button {
     align-items: center;
 }
 
-/* footer {
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    text-decoration: none;
-    padding: 12px;
-    border-top: 2px solid var(--darkgray);
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-} */
 a {
     text-decoration: none;
     color: black;
@@ -100,7 +89,6 @@ button {
     opacity: 100%;
     text-align: center;
     border-width: 1px;
-    transition: all .1s ease-in-out;
 }
 
 button:active {
@@ -198,6 +186,10 @@ button:active {
     padding: 5px;
     border-radius: 4px;
 }
+.wrong {
+    animation-name: shake;
+    animation-duration: .2s;
+}
 #keys>#input-box>.input {
     width: 40px;
     height: 40px;
@@ -206,4 +198,12 @@ button:active {
     font-weight: bolder;
     font-size: 24px;
     text-align: center;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(10px) }
+    50% { transform: translateX(-10px) }
+    75% { transform: translateX(10px) }
+    100% { transform: translateX(0) }
 }
