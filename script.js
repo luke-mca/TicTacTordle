@@ -5,6 +5,7 @@ let wordleGuesses = ["aahed","aalii","aapas","aargh","aarti","abaca","abaci","ab
 
 function randomWord() {
     let word = wordleAnswers[(Math.floor(Math.random()*2315))];
+    wordleGuesses.filter(element => element != word);
     return word;
 };
 
@@ -17,8 +18,14 @@ function wordCheck(word) {
             check = 0;
         }
     };
+    for(let j=0; j<9; j++) {
+        if (word == game.words[j]) {
+            return true;
+            check == 0;
+        }
+    };
     if (check == 1) {
         inputBox.setAttribute("class", "wrong");
         setTimeout(() => {inputBox.setAttribute("class", "")}, 200);
-    }
+    };
 };
