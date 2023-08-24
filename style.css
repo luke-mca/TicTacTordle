@@ -8,6 +8,8 @@
 
 body {
     margin:0;
+    width: 100vw;
+    height: 100vh;
 }
 
 #main {
@@ -24,15 +26,15 @@ header {
     padding: 12px;
     background-color: white;
     border-bottom: solid 2px var(--darkgray);
-    width: 100%;
+    width: 100;
 }
 #title {
     font-weight: bolder;
 }
-header>button {
+/* header>button {
     position: relative;
     right: 20px;
-}
+} */
 
 #body {
     align-self: center;
