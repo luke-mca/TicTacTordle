@@ -110,13 +110,13 @@
                 box.parentElement.style.backgroundColor = "var(--red)";
                 game.board[Math.floor(i/3)][Math.floor(i%3)] = player1.mark;
                 game.winCheck(player1.mark);
-                game.words[Math.floor(i/3)][Math.floor(i%3)] = "found";
+                game.words[Math.floor(i/3)][Math.floor(i%3)] = ".....";
             };
             if ((game.turn%2) == 1 && emptyCheck(box)) {
                 box.parentElement.style.backgroundColor = "var(--blue)";
                 game.board[Math.floor(i/3)][Math.floor(i%3)] = player2.mark;
                 game.winCheck(player2.mark);
-                game.words[Math.floor(i/3)][Math.floor(i%3)] = "found";
+                game.words[Math.floor(i/3)][Math.floor(i%3)] = ".....";
             };     
         },
 
@@ -130,7 +130,6 @@
             else if (game.board[0][2] == mark && game.board[1][2] == mark && game.board[2][2] == mark) {game.win(mark)}
             else if (game.board[0][0] == mark && game.board[1][1] == mark && game.board[2][2] == mark) {game.win(mark)}
             else if (game.board[0][2] == mark && game.board[1][1] == mark && game.board[2][0] == mark) {game.win(mark)}
-            else if (game.turn == 9) {game.win("tie")}
         },
 
         win(player) {
@@ -256,6 +255,9 @@
                     word.appendChild(letter);
                 }
                 wordles[i].insertBefore(word, wordles[i].firstChild);
+                if (((wordles[i].parentElement.style.backgroundColor) == "var(--red)" || (wordles[i].parentElement.style.backgroundColor) == "var(--blue)")) {
+                    wordles[i].firstChild.style.display = "none";
+                }
             }
             wordleGame.clearInput();
             game.turn += 1;
