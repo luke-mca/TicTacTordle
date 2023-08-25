@@ -1,6 +1,6 @@
 :root {
     --gray: rgb(228, 228, 228);
-    --darkgray: rgb(170, 170, 170);
+    --darkgray: rgb(126, 126, 126);
     --red: rgb(241, 131, 131);
     --blue: rgb(134, 134, 226);
     font-family: Arial, Helvetica, sans-serif;
@@ -31,10 +31,9 @@ header {
 #title {
     font-weight: bolder;
 }
-/* header>button {
+header>button {
     position: relative;
-    right: 20px;
-} */
+}
 
 #body {
     align-self: center;
@@ -61,27 +60,32 @@ a {
 }
 
 div>#win {
-    display: grid;
-    grid: 1fr/ 1fr 2fr;
-    gap: 30px;
     position: absolute;
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto; 
-    width: 400px;
-    height: 80px;
-    background-color: var(--gray);
-    border: solid black 2px;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    height: 30vh;
+    border: solid white 6px;
     border-radius: 12px;
+    background-color: white;
     color: black;
-    padding: 24px;
-    font-size: 24px;
+    font-size: 36px;
+    box-shadow: 0px 0px 10px var(--darkgray);
+    display: flex;
+    flex-direction: column;
+    gap: 20%;
+    justify-content: center;
+    align-items: center;
 }
-#win>button {
+#win>#X {
     position: absolute;
     top: 2px;
     right: 2px;
+    border: 0px;
+}
+#win>button {
+    font-size: 16px;
 }
 
 button {

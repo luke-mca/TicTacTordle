@@ -101,7 +101,7 @@
     let game = {
         board: [["", "", ""],["", "", ""],["", "", ""]],
 
-        words: [[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()]],
+        words: [[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()],["fleat", randomWord(), randomWord()]],
 
         turn: 0,
 
@@ -140,14 +140,27 @@
             if (player == "tie") {winDisplay.textContent = ("Tie Game")}
             if (player == "X") {
                 winDisplay.textContent = "Red Wins!";
-                winDisplay.style.backgroundColor = "var(--red)";
+                winDisplay.style.borderColor = "var(--red)";
             }
             if (player == "O") {
                 winDisplay.textContent = "Blue Wins!";
-                winDisplay.style.backgroundColor = "var(--blue)";
+                winDisplay.style.borderColor = "var(--blue)";
             }
             if (player == "X") {player1.wins += 1};
             if (player == "O") {player2.wins += 1};
+            let X = document.createElement("button");
+            X.innerHTML = "X";
+            X.setAttribute("id", "X");
+            X.addEventListener("click", () => {
+                winDisplay.remove();
+            })
+            winDisplay.appendChild(X);
+            let newGame0 = document.createElement("button");
+            newGame0.innerHTML = "New Game";
+            newGame0.addEventListener("click", () => {
+                location.reload();
+            })
+            winDisplay.appendChild(newGame0);
             main.appendChild(winDisplay);
         }
     };
@@ -227,15 +240,15 @@
                         tempWord = tempWord.substring(0, j) + "." + tempWord.substring(j+1);
                         correctCounter += 1;
                     }
-                    else {
-                        for (let k=0; k<5; k++) {
-                            if (k != j) {
-                                if (tempWord[k] == (inputKids[j].value).toLowerCase()) {
-                                    tempWord = tempWord.substring(0, k) + "." + tempWord.substring(k+1);
-                                    words[i].childNodes[j].style.backgroundColor = "orange";
-                                }
-                            };
-                        }
+                }
+                for(let p=0; p<5; p++) {
+                    for (let k=0; k<5; k++) {
+                        if (k != p) {
+                            if (tempWord[k] == (inputKids[p].value).toLowerCase()) {
+                                tempWord = tempWord.substring(0, k) + "." + tempWord.substring(k+1);
+                                words[i].childNodes[p].style.backgroundColor = "orange";
+                            }
+                        };
                     }
                 }
                 if (correctCounter == 5) {
@@ -333,7 +346,66 @@
                     if (letterBox != undefined) {letterBox.value = row[j].innerHTML};
                 };
             });
+        };
+    };
+
+    // click box, updates letters (green, yellow);
+    function updateKeys(letter, color) {
+        for (let i=0; i<3; i++) {
+            let row = keyParents[i].childNodes;
+            for(let j=1; j<row.length; j += 2) {
+                if (row[j].innerHTML == (letter.toUpperCase())) {
+                    if (!(color == "orange" && row[j].style.backgroundColor == "green")) {
+                        row[j].style.backgroundColor = color;
+                    }
+                }
+            }
         }
+    };
+    function resetKeys() {
+        for (let i=0; i<3; i++) {
+            let row = keyParents[i].childNodes;
+            for(let j=1; j<row.length; j += 2) {
+                    row[j].style.backgroundColor = "var(--gray)";
+            }
+        }
+    };
+
+    for (let i=0; i<9; i++) {
+        boxes[i].addEventListener("click", () => {
+            resetKeys();
+            if (boxes[i].parentElement.style.backgroundColor != "") {
+                let words = boxes[i].childNodes;
+                for (let p=0; p<words.length; p++) {
+                    let letters0 = words[p].childNodes;
+                    for (let q=0; q<5; q++) {
+                        if (letters0[q].style.backgroundColor == "green") {
+                            updateKeys(letters0[q].innerHTML, "green");
+                        }
+                    }
+                }
+            }
+            let kids = boxes[i].childNodes;
+            for (let j=0; j<kids.length; j++) {
+                let letters = kids[j].childNodes;
+                for (let k=0; k<5; k++) {
+                    if (letters[k].style.backgroundColor == "orange") {
+                        updateKeys(letters[k].innerHTML, "orange");
+                    }
+                    else if (letters[k].style.backgroundColor == "") {
+                        updateKeys(letters[k].innerHTML, "var(--darkgray)");
+                    }
+                }
+            }
+            for (let j=0; j<kids.length; j++) {
+                let letters = kids[j].childNodes;
+                for (let k=0; k<5; k++) {
+                    if (letters[k].style.backgroundColor == "green") {
+                        updateKeys(letters[k].innerHTML, "green");
+                    }
+                }
+            }
+        });
     }
 </script>
 </body>
