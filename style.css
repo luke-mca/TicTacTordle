@@ -181,6 +181,9 @@ button:active {
     width: 60px;
     font-size: 14px;
 }
+.spec-key>img {
+    width: 70%;
+}
 
 #keys>#input-box {
     display: flex;
