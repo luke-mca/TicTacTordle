@@ -130,6 +130,7 @@
             else if (game.board[0][2] == mark && game.board[1][2] == mark && game.board[2][2] == mark) {game.win(mark)}
             else if (game.board[0][0] == mark && game.board[1][1] == mark && game.board[2][2] == mark) {game.win(mark)}
             else if (game.board[0][2] == mark && game.board[1][1] == mark && game.board[2][0] == mark) {game.win(mark)}
+            else if (game.board[0][0] != "" && game.board[0][1] != "" && game.board[0][2] != "" && game.board[1][0] != "" && game.board[1][1] != "" && game.board[1][2] != "" && game.board[2][0] != "" && game.board[2][1] != "" && game.board[2][2] != "") {game.win("tie")}
         },
 
         win(player) {
