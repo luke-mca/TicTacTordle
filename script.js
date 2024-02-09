@@ -12,20 +12,20 @@ function randomWord() {
 let inputBox = document.getElementById("input-box");
 let check = 1;
 function wordCheck(word) {
-    for(let i=0;i<wordleGuesses.length; i++) {
-        if(word == wordleGuesses[i]) {
-            return true
-            check = 0;
-        }
-    };
+    check = 1;
+    if (wordleGuesses.indexOf(word) != -1) {
+        check = 0;
+        return true;
+    }
     for(let j=0; j<9; j++) {
         if (word == game.words[j]) {
+            check = 0;
             return true;
-            check == 0;
         }
     };
     if (check == 1) {
         inputBox.setAttribute("class", "wrong");
         setTimeout(() => {inputBox.setAttribute("class", "")}, 200);
+        check = 1;
     };
 };
