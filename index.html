@@ -108,7 +108,7 @@
     let game = {
         board: [["", "", ""],["", "", ""],["", "", ""]],
 
-        words: [[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()]],
+        words: [["sleet", "wedge", randomWord()],[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()]],
 
         turn: 0,
 
@@ -262,8 +262,8 @@
                             if (tempWord[k] == (inputKids[p].value).toLowerCase()) {
                                 tempWord = tempWord.substring(0, k) + "." + tempWord.substring(k+1);
                                 words[i].childNodes[p].style.backgroundColor = "orange";
-                                k++;
-                            }
+                                k = k+5;
+                            };
                         };
                     }
                 }
