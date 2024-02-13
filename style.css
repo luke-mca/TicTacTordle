@@ -1,4 +1,6 @@
 :root {
+    --black: black;
+    --white: white;
     --gray: rgb(228, 228, 228);
     --darkgray: rgb(126, 126, 126);
     --red: rgb(241, 131, 131);
@@ -13,6 +15,7 @@ body {
 }
 
 #main {
+    background-color: var(--white);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -23,16 +26,39 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     padding: 12px;
-    background-color: white;
+    color: var(--black);
+    background-color: var(--white);
     border-bottom: solid 2px var(--darkgray);
     width: 100;
 }
+#top-right-box {
+    padding: 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 #title {
+    font-weight: 900;
+}
+#top-right-box>button {
+    position: relative;
     font-weight: bolder;
 }
-header>button {
-    position: relative;
+.icon {
+    height: 20px;
+    padding-left: 0px;
+    padding-right: 8px;
+    border: 0px;
+}
+.icon2 {
+    background-color: white;
+    border-radius: 8px;
+    height: 18px;
+}
+.icon:active {
+    background-color: var(--white);
 }
 
 #body {
@@ -48,7 +74,7 @@ header>button {
 
 #body>div {
     padding: 12px;
-    background-color: white;
+    background-color: var(--white);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,29 +82,32 @@ header>button {
 
 a {
     text-decoration: none;
-    color: black;
+    color: var(--black);
 }
 
 div>#win {
     position: absolute;
-    top: 50%;
+    top: 35%;
     left: 50%; 
     transform: translate(-50%, -50%);
     width: 60vw;
     height: 30vh;
-    border: solid white 6px;
+    border: solid var(--white) 6px;
     border-radius: 12px;
-    background-color: white;
-    color: black;
-    font-size: 36px;
+    background-color: var(--white);
+    color: var(--black);
+    font-size: max(42px, 7vw);
     box-shadow: 0px 0px 10px var(--darkgray);
     display: flex;
     flex-direction: column;
-    gap: 20%;
+    gap: 10%;
     justify-content: center;
     align-items: center;
 }
-#win>#X {
+#win>.win-counter {
+    font-size: 24px;
+}
+.X {
     position: absolute;
     top: 2px;
     right: 2px;
@@ -89,8 +118,8 @@ div>#win {
 }
 
 button {
-    background-color: white;
-    color: black;
+    background-color: var(--white);
+    color: var(--black);
     border-radius: 12px;
     opacity: 100%;
     text-align: center;
@@ -98,8 +127,8 @@ button {
 }
 
 button:active {
-    background-color: black;
-    color: white;
+    background-color: var(--black);
+    color: var(--white);
     transform: scale(.95);
 }
 
@@ -114,7 +143,7 @@ button:active {
     width: 100%;
     height: 100%;
     display: flex;
-    background-color: white;
+    background-color: var(--white);
     flex-direction: column-reverse;
     justify-content: stretch;
     align-items: stretch;
@@ -142,13 +171,13 @@ button:active {
     border: none;
     font-size: min(3.5vw, 2vh);
     font-weight:bold ;
-    background-color: white;
+    background-color: var(--white);
     border: 1px solid var(--darkgray);
     text-transform: uppercase;
 }
 .guessed {
     background-color: var(--darkgray);
-    color: white;
+    color: var(--white);
 }
 
 #keys {
@@ -216,3 +245,104 @@ button:active {
     75% { transform: translateX(10px) }
     100% { transform: translateX(0) }
 }
+
+.settings {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 30vw;
+    height: 30vh;
+    border: solid var(--white) 6px;
+    border-radius: 12px;
+    background-color: var(--white);
+    color: var(--black);
+    font-size: 16px;
+    box-shadow: 0px 0px 10px var(--darkgray);
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.settings>.setTitle {
+    position: relative;
+    top: 2px;
+    padding: 2px;
+    width: 100%;
+    font-size: 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--darkgray)
+}
+.settings-main {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 8px;
+}
+
+/* slider */
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .2s;
+    transition: .2s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .2s;
+    transition: .2s;
+  }
+  
+  input:checked + .slider {
+    background-color: var(--darkgray);
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px var(--darkgray);
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(13px);
+    -ms-transform: translateX(13px);
+    transform: translateX(13px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 17px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
