@@ -114,13 +114,13 @@
 
         click(box, i) {
             if ((game.turn%2) == 0 && emptyCheck(box)) {
-                box.parentElement.style.backgroundColor = "var(--red)";
+                box.parentElement.style.border = "8px solid var(--red)";
                 game.board[Math.floor(i/3)][Math.floor(i%3)] = player1.mark;
                 game.winCheck(player1.mark);
                 game.words[Math.floor(i/3)][Math.floor(i%3)] = ".....";
             };
             if ((game.turn%2) == 1 && emptyCheck(box)) {
-                box.parentElement.style.backgroundColor = "var(--blue)";
+                box.parentElement.style.border = "8px solid var(--blue)";
                 game.board[Math.floor(i/3)][Math.floor(i%3)] = player2.mark;
                 game.winCheck(player2.mark);
                 game.words[Math.floor(i/3)][Math.floor(i%3)] = ".....";
