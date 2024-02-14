@@ -292,7 +292,8 @@
                     word.appendChild(letter);
                 }
                 wordles[i].insertBefore(word, wordles[i].firstChild);
-                if (((wordles[i].parentElement.style.backgroundColor) == "var(--red)" || (wordles[i].parentElement.style.backgroundColor) == "var(--blue)")) {
+                console.log(wordles[i].parentElement.style.border)
+                if (((wordles[i].parentElement.style.border) == "8px solid var(--red))" || (wordles[i].parentElement.style.border) == "8px solid var(--blue)")) {
                     wordles[i].firstChild.style.display = "none";
                 }
             }
