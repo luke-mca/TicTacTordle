@@ -86,7 +86,7 @@
             <button>B</button>
             <button>N</button>
             <button>M</button>
-            <button class="spec-key">
+            <button class="spec-key" id="deleteButton">
                 <img src="backspace-svgrepo-com.svg" alt="backspace">
             </button>
         </div>
@@ -316,7 +316,7 @@
                     word.appendChild(letter);
                 }
                 wordles[i].insertBefore(word, wordles[i].firstChild);
-                if (((wordles[i].parentElement.style.border) == "8px solid var(--red))" || (wordles[i].parentElement.style.border) == "8px solid var(--blue)")) {
+                if (((wordles[i].parentElement.style.border) == "8px solid var(--red)" || (wordles[i].parentElement.style.border) == "8px solid var(--blue)")) {
                     wordles[i].firstChild.style.display = "none";
                 }
             }
@@ -457,8 +457,20 @@
     }
     let displayMode = "light";
     //settings and help
+    let settingsExist = 0;
+    let helpExist = 0;
     let settingsButton = document.getElementById("SETTINGS");
     settingsButton.addEventListener("click", () => {
+        let delSet = document.getElementsByClassName("settings");
+        for (let i=0; i < delSet.length; i++) {
+            delSet[i].remove();
+        }
+        if(settingsExist) {
+            settingsExist = 0;
+            helpExist = 0;
+        }
+        else {
+            settingsExist = 1;
             let main = document.getElementById("main");
             let settingsDisplay = document.createElement("div");
             settingsDisplay.setAttribute("class", "settings");
@@ -482,6 +494,7 @@
             }
             switchType.addEventListener("click", () => {
                 if (displayMode == "light") {
+                document.documentElement.style.setProperty("--SVGblack", "white");
                 document.documentElement.style.setProperty("--gray", "rgb(126, 126, 126)");
                 document.documentElement.style.setProperty("--darkgray", "rgb(80, 80, 80)");
                 document.documentElement.style.setProperty("--white", "rgb(50, 50, 50)");
@@ -491,6 +504,7 @@
                 displayMode = "dark";
                 }
                 else {
+                document.documentElement.style.setProperty("--SVGblack", "black");
                 document.documentElement.style.setProperty("--darkgray", "rgb(126, 126, 126)");
                 document.documentElement.style.setProperty("--gray", "rgb(228, 228, 228)");
                 document.documentElement.style.setProperty("--black", "black");
@@ -527,12 +541,24 @@
             X.setAttribute("class", "X");
             X.addEventListener("click", () => {
                 settingsDisplay.remove();
+                settingsExist = 0;
             })
             settingsDisplay.appendChild(X);
             main.appendChild(settingsDisplay);
+        }
     });
     let helpButton = document.getElementById("HELP");
     helpButton.addEventListener("click", () => {
+        let helpSet = document.getElementsByClassName("settings");
+        for (let i=0; i < helpSet.length; i++) {
+            helpSet[i].remove();
+        }
+        if(helpExist) {
+            helpExist = 0;
+            settingsExist = 0;
+        }
+        else {
+            helpExist = 1;
             let main = document.getElementById("main");
             let helpDisplay = document.createElement("div");
             helpDisplay.setAttribute("class", "settings");
@@ -563,9 +589,11 @@
             X.setAttribute("class", "X");
             X.addEventListener("click", () => {
                 helpDisplay.remove();
+                helpExist = 0;
             })
             helpDisplay.appendChild(X);
             main.appendChild(helpDisplay);
+        }
     });
 </script>
 </body>
