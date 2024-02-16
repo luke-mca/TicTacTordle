@@ -2,8 +2,8 @@
     --SVGblack: black;
     --black: black;
     --white: white;
-    --gray: rgb(228, 228, 228);
-    --darkgray: rgb(126, 126, 126);
+    --gray: rgb(211, 214, 218);
+    --darkgray: rgb(120, 124, 126);
     --red: rgb(241, 131, 131);
     --blue: rgb(134, 134, 226);
     font-family: Arial, Helvetica, sans-serif;
@@ -38,14 +38,17 @@ header {
     padding: 2px;
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
 }
 #title {
     font-weight: 900;
 }
 #top-right-box>button {
+    width: 100%;
     position: relative;
     font-weight: bolder;
+    height: 100%;
 }
 .icon {
     height: 20px;
@@ -53,10 +56,15 @@ header {
     padding-right: 8px;
     border: 0px;
 }
-.icon2 {
-    background-color: var(--white);
+svg {
+    width: 100%;
+    /* background-color: var(--white); */
     border-radius: 8px;
     height: 18px;
+    fill: var(--black);
+}
+#deleteSVG {
+    height: 30px;
 }
 .icon:active {
     background-color: var(--white);
