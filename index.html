@@ -282,13 +282,13 @@
                 let tempWord = game.words[Math.floor(i/3)][Math.floor(i%3)];
                 let greenTempWord = tempWord;
                 let correctCounter = 0;
-                for(let j=0; j<5; j++) {
-                    words[i].childNodes[j].innerHTML = inputKids[j].value;
-                    words[i].childNodes[j].setAttribute("class","letter guessed")
-                    if (tempWord[j] == (inputKids[j].value).toLowerCase()) {
-                        tempWord = tempWord.substring(0, j) + "." + tempWord.substring(j+1);
-                    }
-                }
+                // for(let j=0; j<5; j++) {
+                //     words[i].childNodes[j].innerHTML = inputKids[j].value;
+                //     words[i].childNodes[j].setAttribute("class","letter guessed")
+                //     if (tempWord[j] == (inputKids[j].value).toLowerCase()) {
+                //         tempWord = tempWord.substring(0, j) + "." + tempWord.substring(j+1);
+                //     }
+                // }
                 for(let p=0; p<5; p++) {
                     for (let k=0; k<5; k++) {
                         if (k != p) {
