@@ -141,7 +141,7 @@
     let game = {
         board: [["", "", ""],["", "", ""],["", "", ""]],
 
-        words: [[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()]],
+        words: [[randomWord(), "woven", randomWord()],[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()]],
 
         turn: 0,
 
@@ -280,7 +280,7 @@
             let words = document.getElementsByClassName(wordleGame.rowNum[wordleGame.currentGuess]);
             for (let i=0; i<9; i++) {
                 let tempWord = game.words[Math.floor(i/3)][Math.floor(i%3)];
-                let greenTempWord = tempWord;
+                // let greenTempWord = tempWord;
                 let correctCounter = 0;
                 // for(let j=0; j<5; j++) {
                 //     words[i].childNodes[j].innerHTML = inputKids[j].value;
@@ -289,9 +289,21 @@
                 //         tempWord = tempWord.substring(0, j) + "." + tempWord.substring(j+1);
                 //     }
                 // }
+                let greenLetters = ["", "", "", "", ""]
+                for(let j=0; j<5; j++) {
+                    words[i].childNodes[j].innerHTML = inputKids[j].value;
+                    words[i].childNodes[j].setAttribute("class","letter guessed")
+                    if (tempWord[j] == (inputKids[j].value).toLowerCase()) {
+                        greenLetters[j] = ".";
+                        tempWord = tempWord.substring(0, j) + "." + tempWord.substring(j+1);
+                        words[i].childNodes[j].style.backgroundColor = "rgb(106, 170, 100)";
+                        words[i].childNodes[j].style.border = "1px solid rgb(106, 170, 100)";
+                        correctCounter += 1;
+                    }
+                }
                 for(let p=0; p<5; p++) {
                     for (let k=0; k<5; k++) {
-                        if (k != p) {
+                        if (k != p && greenLetters[p] == "") {
                             if (tempWord[k] == (inputKids[p].value).toLowerCase()) {
                                 tempWord = tempWord.substring(0, k) + "." + tempWord.substring(k+1);
                                 words[i].childNodes[p].style.backgroundColor = "rgb(201, 180, 88)";
@@ -299,15 +311,6 @@
                                 k = k+5;
                             };
                         };
-                    }
-                }
-                for(let j=0; j<5; j++) {
-                    words[i].childNodes[j].innerHTML = inputKids[j].value;
-                    words[i].childNodes[j].setAttribute("class","letter guessed")
-                    if (greenTempWord[j] == (inputKids[j].value).toLowerCase()) {
-                        words[i].childNodes[j].style.backgroundColor = "rgb(106, 170, 100)";
-                        words[i].childNodes[j].style.border = "1px solid rgb(106, 170, 100)";
-                        correctCounter += 1;
                     }
                 }
                 if (correctCounter == 5) {
@@ -414,7 +417,22 @@
             let row = keyParents[i].childNodes;
             for(let j=1; j<row.length; j += 2) {
                 if (row[j].innerHTML == (letter.toUpperCase())) {
-                    if (!(color == "rgb(201, 180, 88)" && row[j].style.backgroundColor == "rgb(106, 170, 100)")) {
+                    // if (!(color == "rgb(201, 180, 88)" && row[j].style.backgroundColor == "rgb(106, 170, 100)")) {
+                    //     row[j].style.backgroundColor = color;
+                    //     console.log("2: " + row[j].innerHTML + " " + color);
+                    // }
+                    //need to make check for if box is yellow and color is gray
+                    if (color == "var(--darkgray)") {
+                        if (!(row[j].style.backgroundColor == "rgb(201, 180, 88)" || row[j].style.backgroundColor == "rgb(106, 170, 100)")) {
+                            row[j].style.backgroundColor = color;
+                        }
+                    }
+                    if (color == "rgb(201, 180, 88)") { //yellow
+                        if (!(row[j].style.backgroundColor == "rgb(106, 170, 100)")) {
+                            row[j].style.backgroundColor = color;
+                        }
+                    }
+                    if (color == "rgb(106, 170, 100)") { //yellow
                         row[j].style.backgroundColor = color;
                     }
                 }
