@@ -5,7 +5,6 @@ let wordleGuesses = ["aahed","aalii","aapas","aargh","aarti","abaca","abaci","ab
 
 function randomWord() {
     let word = wordleAnswers[(Math.floor(Math.random()*2315))];
-    wordleGuesses.filter(element => element != word);
     return word;
 };
 
@@ -13,17 +12,18 @@ let inputBox = document.getElementById("input-box");
 let check = 1;
 function wordCheck(word) {
     check = 1;
-    if (wordleGuesses.indexOf(word) != -1) {
-        wordleGuesses.filter(element => element != word);
+    let guessIndex = wordleGuesses.indexOf(word);
+    if (guessIndex != -1) {
+        wordleGuesses.splice(guessIndex, 1);
         check = 0;
         return true;
     }
-    for(let j=0; j<9; j++) {
-        if (word == game.words[j]) {
-            check = 0;
-            return true;
-        }
-    };
+    // for(let j=0; j<9; j++) {
+    //     if (word == game.words[j]) {
+    //         check = 0;
+    //         return true;
+    //     }
+    // };
     if (check == 1) {
         inputBox.setAttribute("class", "wrong");
         setTimeout(() => {inputBox.setAttribute("class", "")}, 200);
