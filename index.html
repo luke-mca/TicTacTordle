@@ -9,7 +9,7 @@
 <body>
 <div id="main">
     <header>
-        <div id="title">TIC TAC TORDLE</div>
+        <div id="title">TicTacTordle</div>
         <div id="top-right-box">
             <button class="icon" id="HELP">
                 <svg fill="#000000" width="800px" height="800px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
@@ -148,12 +148,14 @@
         click(box, i) {
             if ((game.turn%2) == 0 && emptyCheck(box)) {
                 box.parentElement.style.border = "8px solid var(--red)";
+                box.parentElement.style.boxShadow = "0px 0px 0px var(--darkgray)";
                 game.board[Math.floor(i/3)][Math.floor(i%3)] = player1.mark;
                 game.winCheck(player1.mark);
                 game.words[Math.floor(i/3)][Math.floor(i%3)] = ".....";
             };
             if ((game.turn%2) == 1 && emptyCheck(box)) {
                 box.parentElement.style.border = "8px solid var(--blue)";
+                box.parentElement.style.boxShadow = "0px 0px 0px var(--darkgray)";
                 game.board[Math.floor(i/3)][Math.floor(i%3)] = player2.mark;
                 game.winCheck(player2.mark);
                 game.words[Math.floor(i/3)][Math.floor(i%3)] = ".....";
@@ -260,6 +262,51 @@
             inputKids[0].focus();
         },
 
+        hardModeCheck(word) {
+            if (wordleGame.currentGuess == 0) {
+                return true;
+            }
+            if (wordleGame.hardMode.boxClicked == null) {
+                inputBox.setAttribute("class", "wrong");
+                setTimeout(() => {inputBox.setAttribute("class", "")}, 200);
+                return false;
+            }
+            else {
+                let greenLetters = ["","","","",""];
+                let greenLettersCount = 0;
+                let neededLetters = ["","","","",""];
+                let neededLettersCount = 0;
+                let noLetters = ["","","","","","","","","","","","","","","","","","","","",""];
+                let noLettersCount = 0;
+                let hardRows = document.getElementsByClassName("row");
+                console.log(hardRows);
+                for (let i=0; i<hardRows.length; i++) {
+                    let hardRowLetters = hardRows[i].childNodes;
+                    for (let j=1; j<hardRowLetters.length;j=j+2) {
+                        console.log(hardRowLetters[j]);
+                        if(hardRowLetters[j].style.backgroundColor == "rgb(106,170,100)") {
+                            //green
+                            greenLetters[greenLettersCount] = hardRowLetters[j].textContent;
+                            greenLettersCount++;
+                        };
+                        if(hardRowLetters[j].style.backgroundColor == "rgb(201,180,88)") {
+                            //yellow
+                            neededLetters[neededLettersCount] = hardRowLetters[j].textContent;
+                            neededLettersCount++;
+                        }
+                        if(hardRowLetters[j].style.backgroundColor == "var(--darkgray)") {
+                            noLetters[noLettersCount] = hardRowLetters[j].textContent;
+                            noLettersCount++;
+                        }
+                    }
+                }
+                console.log(greenLetters);
+                console.log(neededLetters);
+                console.log(noLetters);
+                return true;
+            }       
+        },
+
         updateBoxes() {
             let tempEnteredWord = "";
             let rows = document.getElementsByClassName("row");
@@ -267,6 +314,11 @@
                 tempEnteredWord += inputKids[p].value;
             };
             enteredWord = tempEnteredWord.toLowerCase();
+            if (wordleGame.hardMode.active) {
+                if(!wordleGame.hardModeCheck(enteredWord)) {
+                    return false;
+                };
+            };
             if (!wordCheck(enteredWord)) {
                 return false;
             }
@@ -319,6 +371,10 @@
                         };
                     }
                 }
+                if (wordleGame.hardMode.boxClicked != null) {
+                    updateKeyboard(wordleGame.hardMode.boxClicked);
+                }
+                //check if win
                 if (correctCounter == 5) {
                     game.click(wordles[i], i);
                 }
@@ -353,10 +409,11 @@
     };
 
     //KEYBOARD
-    let enter = document.getElementById("enter");
-    enter.addEventListener("click", () => {
-        wordleGame.updateBoxes();
-    })
+    // let enter = document.getElementById("enter");
+    // enter.addEventListener("click", () => {
+    //     wordleGame.updateBoxes();
+    //     console.log("1 click");
+    // })
     
     for (let i=0; i<4;i++) {
         inputKids[i].addEventListener("keydown" , () => {
@@ -371,7 +428,9 @@
     }
     for (let i=0; i<5;i++) {
         inputKids[i].addEventListener("keyup" , () => {
-            if (event.key == "Enter") {wordleGame.updateBoxes()};
+            if (event.key == "Enter") {
+                wordleGame.updateBoxes()
+            };
         })
     }
     for (let i=1; i<5;i++) {
@@ -453,12 +512,9 @@
             }
         }
     };
-
-    for (let i=0; i<9; i++) {
-        boxes[i].addEventListener("click", () => {
-            resetKeys();
-            if (boxes[i].parentElement.style.backgroundColor != "") {
-                let words = boxes[i].childNodes;
+    function updateKeyboard(box) {
+        if (box.parentElement.style.backgroundColor != "") {
+                let words = box.childNodes;
                 for (let p=0; p<words.length; p++) {
                     let letters0 = words[p].childNodes;
                     for (let q=0; q<5; q++) {
@@ -468,7 +524,7 @@
                     }
                 }
             }
-            let kids = boxes[i].childNodes;
+            let kids = box.childNodes;
             for (let j=0; j<kids.length; j++) {
                 let letters = kids[j].childNodes;
                 for (let k=0; k<5; k++) {
@@ -488,7 +544,51 @@
                     }
                 }
             }
-        });
+    };
+
+    let realBoxes = document.getElementsByClassName("box");
+    for (let i=0; i<9; i++) {
+        realBoxes[i].addEventListener("click", () => {
+            //hard mode click
+            for (let j=0; j<9; j++) {
+                realBoxes[j].style.boxShadow = "0px 0px 0px var(--darkgray)";
+            }
+            wordleGame.hardMode.boxClicked = boxes[i];
+            if (realBoxes[i].style.border != "8px solid var(--red)" && realBoxes[i].style.border != "8px solid var(--blue)") {
+                switch(i) {
+                case 0:
+                    realBoxes[i].style.boxShadow = "-6px -6px 0px -4px var(--darkgray) inset";
+                    break;
+                case 1:
+                    realBoxes[i].style.boxShadow = "-6px -6px 0px -4px var(--darkgray) inset, 6px -4px 0px -4px var(--darkgray) inset";
+                    break;
+                case 2:
+                    realBoxes[i].style.boxShadow = "6px -6px 0px -4px var(--darkgray) inset";
+                    break;
+                case 3:
+                    realBoxes[i].style.boxShadow = "-6px -6px 0px -4px var(--darkgray) inset, -4px 6px 0px -4px var(--darkgray) inset";
+                    break;
+                case 4:
+                    realBoxes[i].style.boxShadow = "-6px -6px 0px -4px var(--darkgray) inset, 6px 6px 0px -4px var(--darkgray) inset";
+                    break;
+                case 5:
+                    realBoxes[i].style.boxShadow = "6px -6px 0px -4px var(--darkgray) inset, 4px 6px 0px -4px var(--darkgray) inset";
+                    break;
+                case 6:
+                    realBoxes[i].style.boxShadow = "-6px 6px 0px -4px var(--darkgray) inset";
+                    break;
+                case 7:
+                    realBoxes[i].style.boxShadow = "-6px 6px 0px -4px var(--darkgray) inset, 6px 4px 0px -4px var(--darkgray) inset";
+                    break;
+                case 8:
+                    realBoxes[i].style.boxShadow = "6px 6px 0px -4px var(--darkgray) inset";
+                    break;
+            }
+            }
+            //end hard mode click
+            resetKeys();
+            updateKeyboard(boxes[i]);
+        })
     }
     let displayMode = "light";
     //settings and help
@@ -534,7 +634,6 @@
                 else {
                     wordleGame.hardMode.active = 1;
                 }
-                console.log(wordleGame.hardMode.active);
             });
 
             switchHardType.setAttribute("type", "checkbox");
