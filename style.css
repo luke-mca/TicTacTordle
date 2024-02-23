@@ -1,14 +1,14 @@
 @font-face {
     font-family: titleFont;
-    src: url(fonts/karnakcondensed-normal-700.woff2);
+    src: url(karnakcondensed-normal-700.woff2);
 }
 @font-face {
     font-family: mainFont;
-    src: url(fonts/franklin-normal-700.woff2);
+    src: url(franklin-normal-700.woff2);
 }
 @font-face {
     font-family: textFont;
-    src: url(fonts/franklin-normal-600.woff2);
+    src: url(franklin-normal-600.woff2);
 }
 
 :root {
@@ -147,6 +147,13 @@ div>#win {
     top: 2px;
     right: 2px;
     border: 0px;
+}
+.X:active {
+    background-color: var(--white);
+    color: var(--black);
+}
+.X>svg {
+    height: 16px;
 }
 #win>button {
     font-size: 16px;
