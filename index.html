@@ -242,6 +242,12 @@
     })
 
     let wordleGame = {
+        hardMode: {
+            active: 0,
+
+            boxClicked: null,
+        },
+
         guesses: [""],
         
         rowNum: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
@@ -511,6 +517,38 @@
             settingsTitle.style.fontWeight = 600;
             settingsDisplay.appendChild(settingsTitle);
 
+            let switchHardDiv = document.createElement("div");
+            switchHardDiv.setAttribute("class", "settings-main");
+            let switchHardDivText = document.createElement("div");
+            switchHardDivText.textContent = "Hard Mode"
+            let switchHardMode = document.createElement("label");
+            switchHardMode.setAttribute("class", "switch");
+            let switchHardType = document.createElement("input");
+            if (wordleGame.hardMode.active) {
+                switchHardType.setAttribute("checked", "true");
+            }
+            switchHardType.addEventListener("click", () => {
+                if (wordleGame.hardMode.active) {
+                    wordleGame.hardMode.active = 0;
+                }
+                else {
+                    wordleGame.hardMode.active = 1;
+                }
+                console.log(wordleGame.hardMode.active);
+            });
+
+            switchHardType.setAttribute("type", "checkbox");
+            let switchHardSpan = document.createElement("span");
+            switchHardSpan.setAttribute("class", "slider round");
+            switchHardMode.appendChild(switchHardType);
+            switchHardMode.appendChild(switchHardSpan);
+            switchHardDiv.appendChild(switchHardDivText);
+            switchHardDiv.appendChild(switchHardMode);
+            settingsDisplay.appendChild(switchHardDiv);
+
+
+
+            //darkMode
             let switchDiv = document.createElement("div");
             switchDiv.setAttribute("class", "settings-main");
             let switchDivText = document.createElement("div");

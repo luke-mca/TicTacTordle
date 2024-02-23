@@ -14,6 +14,7 @@ let check = 1;
 function wordCheck(word) {
     check = 1;
     if (wordleGuesses.indexOf(word) != -1) {
+        wordleGuesses.filter(element => element != word);
         check = 0;
         return true;
     }

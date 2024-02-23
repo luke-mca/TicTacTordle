@@ -187,13 +187,13 @@ button:active {
 }
 .guessed {
     background-color: var(--darkgray);
-    color: var(--white);
+    color: white;
 }
 
 #keys {
     align-self: center;
     margin-top: 10px;
-    margin-bottom: 60px;
+    margin-bottom: 10px;
     flex: 1;
     display: grid;
     grid:  repeat(4, 1fr) / 1fr;
@@ -245,6 +245,8 @@ button:active {
     height: 40px;
     text-transform: uppercase;
     border: 2px var(--gray) solid;
+    background-color: var(--white);
+    color: var(--black);
     font-weight: bolder;
     font-size: 24px;
     text-align: center;
