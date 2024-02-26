@@ -10,6 +10,10 @@
     font-family: textFont;
     src: url(franklin-normal-600.woff2);
 }
+@font-face {
+    font-family: mobileTitleFont;
+    src: url(karnak-normal-400.woff2);
+}
 
 :root {
     --SVGblack: black;
@@ -49,7 +53,7 @@ header {
     height: 40px;
 }
 #top-right-box {
-    width: auto;
+    width: max(180px,7vw);
     padding: 2px;
     display: flex;
     flex-direction: row;
@@ -57,6 +61,7 @@ header {
     align-items: center;
 }
 #title {
+    width: max(180px, 7vw);
     font-size: 28px;
     font-weight: 900;
     font-family: titleFont;
@@ -120,7 +125,7 @@ a {
     color: var(--black);
 }
 
-div>#win {
+#win {
     position: absolute;
     top: 35%;
     left: 50%; 
@@ -139,8 +144,16 @@ div>#win {
     justify-content: center;
     align-items: center;
 }
-#win>.win-counter {
-    font-size: 24px;
+#win-non-mobile {
+    width: 30%;
+    height: 100%;
+    text-align: center;
+    border: solid var(--white) 6px;
+    border-radius: 12px;
+    background-color: var(--white);
+    color: var(--black);
+    font-size: min(36px, 6vw);
+    box-shadow: 0px 0px 10px var(--darkgray);
 }
 .X {
     position: absolute;
@@ -301,8 +314,8 @@ button:active {
     top: 50%;
     left: 50%; 
     transform: translate(-50%, -50%);
-    width: min(30vw, 300px);
-    height: 30vh;
+    width: min(50vw, 500px);
+    height: 40vh;
     border: solid var(--white) 6px;
     border-radius: 12px;
     background-color: var(--white);
@@ -315,7 +328,7 @@ button:active {
     justify-content: space-evenly;
     align-items: center;
 }
-.settings>.setTitle {
+.setTitle {
     position: relative;
     top: 2px;
     padding: 2px;
