@@ -106,9 +106,10 @@ svg {
     flex-direction: row;
     justify-content: space-between;
 }
-/* .ad {
+.ad {
     margin: 2px;
-} */
+    background-color: black;
+}
 
 #game-body {
     align-self: center;
