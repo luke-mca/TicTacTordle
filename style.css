@@ -105,12 +105,12 @@ svg {
 
 #body {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
 }
-.ad {
+/* .ad {
     margin: 2px;
-}
+} */
 
 #game-body {
     align-self: center;
