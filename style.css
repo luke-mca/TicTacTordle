@@ -107,8 +107,9 @@ svg {
     justify-content: space-between;
 }
 .ad {
+    width: 160px;
+    height:600px;
     margin: 2px;
-    background-color: black;
 }
 
 #game-body {
