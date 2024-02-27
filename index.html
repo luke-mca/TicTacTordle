@@ -22,7 +22,13 @@
             <button id="new-game">New Game</button>
         </div>
     </header>
+    
     <div id="body">
+        <div class="ad">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1447600906908117"
+     crossorigin="anonymous"></script>
+        </div>
+        <div id="game-body">
         <div class="box">
             <div class="wordle"></div>
         </div>
@@ -49,6 +55,11 @@
         </div>
         <div class="box">
             <div class="wordle"></div>
+        </div>
+        </div>
+        <div class="ad">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1447600906908117"
+     crossorigin="anonymous"></script>
         </div>
     </div>
     <div id="keys">
@@ -151,6 +162,8 @@
         words: [[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()]],
 
         turn: 0,
+        
+        done: false,
 
         click(box, i) {
             if ((game.turn%2) == 0 && emptyCheck(box)) {
@@ -231,6 +244,20 @@
                 if (player == "X") {player1.wins += 1};
                 if (player == "O") {player2.wins += 1};
                 main.insertBefore(winDisplay, main.childNodes[2]);
+            }
+            game.done = true;
+            let wordles = document.getElementsByClassName("wordle");
+            for (let i=0; i<9; i++) {
+                let wordle = wordles[i];
+                let word = wordle.childNodes[0];
+                if (game.board[Math.floor(i/3)][Math.floor(i%3)] == "") {
+                    for (let j=0; j<5; j++) {
+                    word.childNodes[j].innerHTML = (game.words[Math.floor(i/3)][Math.floor(i%3)])[j];
+                    word.childNodes[j].style.backgroundColor = "rgb(106, 170, 100)";
+                    word.childNodes[j].style.border = "1px solid rgb(106, 170, 100)";
+                    word.childNodes[j].style.color = "var(--white)";
+                    }
+                }
             }
         }
     };
@@ -393,6 +420,9 @@
                 //check if win
                 if (correctCounter == 5) {
                     game.click(wordles[i], i);
+                    if(game.done) {
+                        return;
+                    }
                 }
                 correctCounter = 0;
             }

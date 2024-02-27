@@ -102,6 +102,12 @@ svg {
 }
 
 #body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#game-body {
     align-self: center;
     margin-top: 5px;
     width: min(62vh, 95vw);
@@ -112,7 +118,7 @@ svg {
     background-color: var(--darkgray);
 }
 
-#body>div {
+#game-body>div {
     padding: 12px;
     background-color: var(--white);
     display: flex;
