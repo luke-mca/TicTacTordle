@@ -122,6 +122,12 @@
         console.log("true")
         let title = document.getElementById("title");
         title.style.fontFamily = "mobileTitleFont";
+        let root = document.querySelector(':root');
+        root.style.fontFamily = "textFont";
+        let buttons = document.querySelectorAll('.row>button');
+        buttons.forEach((butt) => {
+            butt.style.fontFamily = "textFont";
+        });
     }
 
     let inputKids = document.getElementsByClassName("input");
@@ -655,6 +661,10 @@
             let main = document.getElementById("main");
             let settingsDisplay = document.createElement("div");
             settingsDisplay.setAttribute("class", "settings");
+            if (isMobile) {
+                settingsDisplay.style.width = "min(40vw, 400px)";
+                settingsDisplay.style.height = "40vh";
+            }
 
             let settingsTitle = document.createElement("div");
 
@@ -775,6 +785,11 @@
             let main = document.getElementById("main");
             let helpDisplay = document.createElement("div");
             helpDisplay.setAttribute("class", "settings");
+
+            if (isMobile) {
+                helpDisplay.style.width = "min(50vw, 500px)";
+                helpDisplay.style.height = "50vh";
+            }
 
             let helpTitle = document.createElement("div");
             helpTitle.textContent = "How To Play";
