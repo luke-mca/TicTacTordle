@@ -88,3 +88,61 @@
     75% { transform: translateX(10px) }
     100% { transform: translateX(0) }
 }
+
+
+
+/* Animation container for MILKS Easter egg */
+.animation-container {
+    position: relative;
+    display: inline-block;
+}
+
+.milk-animation {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    right: -30px;
+    bottom: -30px;
+    pointer-events: none;
+    z-index: 10;
+    display: block;
+}
+
+.milk-animation-icon {
+    position: absolute;
+    display: inline;
+    font-size: 136px;
+    opacity: 0.9;
+    animation: milkBounce 1.5s ease-in-out infinite;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Position icons around the input box with staggered animation delays */
+.milk-animation-icon:nth-child(1) { top: -15px; left: -15px; animation-delay: 0s; }
+.milk-animation-icon:nth-child(2) { top: -15px; right: -15px; animation-delay: 0.2s; }
+.milk-animation-icon:nth-child(3) { bottom: -15px; left: -15px; animation-delay: 0.4s; }
+.milk-animation-icon:nth-child(4) { bottom: -15px; right: -15px; animation-delay: 0.6s; }
+.milk-animation-icon:nth-child(5) { top: 50%; left: -30px; transform: translateY(-50%); animation-delay: 0.8s; }
+.milk-animation-icon:nth-child(6) { top: 50%; right: -30px; transform: translateY(-50%); animation-delay: 1s; }
+.milk-animation-icon:nth-child(7) { top: -30px; left: 50%; transform: translateX(-50%); animation-delay: 1.2s; }
+.milk-animation-icon:nth-child(8) { bottom: -30px; left: 50%; transform: translateX(-50%); animation-delay: 1.4s; }
+
+/* Milk emoji bounce animation */
+@keyframes milkBounce {
+    0%, 100% {
+        transform: scale(1) translateY(0) rotate(0deg);
+        opacity: 0.9;
+    }
+    25% {
+        transform: scale(1.1) translateY(-8px) rotate(-5deg);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2) translateY(-12px) rotate(0deg);
+        opacity: 1;
+    }
+    75% {
+        transform: scale(1.1) translateY(-8px) rotate(5deg);
+        opacity: 1;
+    }
+}

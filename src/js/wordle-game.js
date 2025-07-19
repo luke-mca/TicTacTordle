@@ -71,13 +71,19 @@ export class WordleGame {
         }
         
         const enteredWord = tempEnteredWord.toLowerCase();
-        
+
+        // Easter egg: Check for "milks" or "milky" - play animation but continue processing
+        if (enteredWord === "milks" || enteredWord === "milky") {
+            this.playMilkAnimation();
+            // Don't return false - let it continue as a normal guess
+        }
+
         if (this.hardMode.active) {
             if (!this.hardModeCheck(enteredWord)) {
                 return false;
             }
         }
-        
+
         if (!wordCheck(enteredWord)) {
             this.shakeInputBox();
             return false;
@@ -211,5 +217,39 @@ export class WordleGame {
         setTimeout(() => {
             inputBox.classList.remove('shake');
         }, 500); // Match the animation duration
+    }
+
+
+
+    /**
+     * Play milk emoji animation around input box when "milks" or "milky" is guessed
+     */
+    playMilkAnimation() {
+        const inputBox = this.inputBox;
+
+        // Create animation container
+        const animationContainer = document.createElement('div');
+        animationContainer.className = 'milk-animation';
+
+        // Create multiple milk emojis around the input box
+        for (let i = 0; i < 8; i++) {
+            const iconDiv = document.createElement('div');
+            iconDiv.className = 'milk-animation-icon';
+            iconDiv.textContent = '🥛';
+            animationContainer.appendChild(iconDiv);
+        }
+
+        // Add animation container to input box parent
+        inputBox.parentElement.style.position = 'relative';
+        inputBox.parentElement.appendChild(animationContainer);
+
+        // Don't clear input - let the normal game flow handle it
+
+        // Remove animation after 3 seconds
+        setTimeout(() => {
+            if (animationContainer.parentElement) {
+                animationContainer.parentElement.removeChild(animationContainer);
+            }
+        }, 3000);
     }
 }
