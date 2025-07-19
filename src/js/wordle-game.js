@@ -79,6 +79,7 @@ export class WordleGame {
         }
         
         if (!wordCheck(enteredWord)) {
+            this.shakeInputBox();
             return false;
         }
 
@@ -195,5 +196,20 @@ export class WordleGame {
                 behavior: 'smooth'
             });
         }
+    }
+
+    /**
+     * Add shake animation to input box for invalid words
+     */
+    shakeInputBox() {
+        const inputBox = this.inputBox;
+
+        // Add shake class
+        inputBox.classList.add('shake');
+
+        // Remove shake class after animation completes
+        setTimeout(() => {
+            inputBox.classList.remove('shake');
+        }, 500); // Match the animation duration
     }
 }
