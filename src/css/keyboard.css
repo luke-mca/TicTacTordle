@@ -1,0 +1,79 @@
+/* Keyboard and input styles */
+#keys {
+    align-self: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    flex: 1;
+    display: grid;
+    grid: repeat(4, 1fr) / 1fr;
+    gap: 2px;
+}
+
+#keys > .row {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    width: 95vw;
+}
+
+.row > button {
+    background-color: var(--gray);
+    font-weight: bolder;
+    font-size: 20px;
+    width: 43px;
+    height: 58px;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 2px;
+    border: none;
+    font-family: mainFont, arial;
+}
+
+.row > .spec-key {
+    width: 60px;
+    font-size: 14px;
+}
+
+.spec-key > img {
+    padding-top: 3px;
+    width: 70%;
+}
+
+#keys > #input-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border: solid 4px var(--red);
+    margin: auto;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.wrong {
+    animation-name: shake;
+    animation-duration: 0.2s;
+}
+
+#keys > #input-box > .input {
+    outline: none;
+    width: 40px;
+    height: 40px;
+    text-transform: uppercase;
+    border: 2px var(--gray) solid;
+    background-color: var(--white);
+    color: var(--black);
+    font-weight: bolder;
+    font-size: 24px;
+    text-align: center;
+    caret-color: transparent;
+    font-family: mainFont, arial;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(10px) }
+    50% { transform: translateX(-10px) }
+    75% { transform: translateX(10px) }
+    100% { transform: translateX(0) }
+}

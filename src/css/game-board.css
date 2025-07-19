@@ -1,0 +1,78 @@
+/* Game board and wordle grid styles */
+#body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#game-body {
+    align-self: center;
+    margin-top: 5px;
+    width: min(62vh, 95vw);
+    height: min(62vh, 95vw);
+    display: grid;
+    grid: repeat(3, 1fr) / repeat(3, 1fr);
+    gap: 2px;
+    background-color: var(--darkgray);
+}
+
+#game-body > div {
+    padding: 12px;
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    overflow: hidden;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+.wordle {
+    padding: 2px;
+    margin: 1px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: var(--white);
+    flex-direction: column-reverse;
+    justify-content: stretch;
+    align-items: stretch;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.word {
+    margin-top: 8px;
+    gap: 4px;
+    width: 100%;
+    height: 17%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.letter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: min(4.5vw, 2.5vh);
+    height: min(4.5vw, 2.5vh);
+    border: none;
+    font-size: min(3.5vw, 2vh);
+    font-weight: bold;
+    background-color: var(--white);
+    border: 1px solid var(--darkgray);
+    text-transform: uppercase;
+}
+
+.guessed {
+    background-color: var(--darkgray);
+    color: white;
+}

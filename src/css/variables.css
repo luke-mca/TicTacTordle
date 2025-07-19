@@ -1,0 +1,12 @@
+/* CSS Custom Properties (Variables) */
+:root {
+    --SVGblack: black;
+    --black: black;
+    --white: white;
+    --gray: rgb(211, 214, 218);
+    --darkgray: rgb(120, 124, 126);
+    --red: rgb(241, 131, 131);
+    --blue: rgb(134, 134, 226);
+    font-family: mainFont, Helvetica, Arial, sans-serif;
+    touch-action: manipulation;
+}

@@ -1,0 +1,14 @@
+/* Base styles and layout */
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+#main {
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100vh;
+}

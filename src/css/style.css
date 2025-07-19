@@ -1,18 +1,18 @@
 @font-face {
     font-family: titleFont;
-    src: url(karnakcondensed-normal-700.woff2);
+    src: url(../../assets/fonts/karnakcondensed-normal-700.woff2);
 }
 @font-face {
     font-family: mainFont;
-    src: url(franklin-normal-700.woff2);
+    src: url(../../assets/fonts/franklin-normal-700.woff2);
 }
 @font-face {
     font-family: textFont;
-    src: url(franklin-normal-400.woff2);
+    src: url(../../assets/fonts/franklin-normal-400.woff2);
 }
 @font-face {
     font-family: mobileTitleFont;
-    src: url(karnak-normal-400.woff2);
+    src: url(../../assets/fonts/karnak-normal-400.woff2);
 }
 
 

@@ -1,0 +1,8 @@
+/* Main CSS file - imports all component styles */
+@import './fonts.css';
+@import './variables.css';
+@import './base.css';
+@import './header.css';
+@import './game-board.css';
+@import './keyboard.css';
+@import './components.css';

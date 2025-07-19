@@ -1,20 +1,39 @@
 {
   "name": "tictactordle",
   "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
+  "description": "A combination of Tic Tac Toe and Wordle - play Wordle in 9 boxes simultaneously to win 3 in a row!",
+  "main": "src/js/main.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx serve public -l 3000",
+    "dev": "npx serve . -l 3000",
+    "build": "echo 'No build process needed for vanilla JS'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint src/js/**/*.js",
+    "format": "npx prettier --write src/**/*.{js,css,html}"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/luke-mca/TicTacTordle.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "game",
+    "wordle",
+    "tic-tac-toe",
+    "puzzle",
+    "word-game"
+  ],
+  "author": "Luke McArthur",
   "bugs": {
     "url": "https://github.com/luke-mca/TicTacTordle/issues"
   },
-  "homepage": "https://github.com/luke-mca/TicTacTordle#readme"
+  "homepage": "https://github.com/luke-mca/TicTacTordle#readme",
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "serve": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
 }

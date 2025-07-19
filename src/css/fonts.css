@@ -1,0 +1,20 @@
+/* Font definitions */
+@font-face {
+    font-family: titleFont;
+    src: url(../../assets/fonts/karnakcondensed-normal-700.woff2);
+}
+
+@font-face {
+    font-family: mainFont;
+    src: url(../../assets/fonts/franklin-normal-700.woff2);
+}
+
+@font-face {
+    font-family: textFont;
+    src: url(../../assets/fonts/franklin-normal-400.woff2);
+}
+
+@font-face {
+    font-family: mobileTitleFont;
+    src: url(../../assets/fonts/karnak-normal-400.woff2);
+}
