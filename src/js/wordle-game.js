@@ -165,7 +165,10 @@ export class WordleGame {
         
         this.clearInput();
         this.mainGame.turn += 1;
-        
+
+        // Auto-scroll all wordle boxes to show the most recent guess
+        this.scrollBoxesToTop();
+
         if (this.mainGame.turn % 2 === 0) {
             this.inputBox.style.border = "4px solid var(--red)";
         } else {
@@ -177,5 +180,20 @@ export class WordleGame {
         // This method would be implemented to update keyboard colors
         // Based on the letters used in the selected box
         console.log("Update keyboard for box:", box);
+    }
+
+    /**
+     * Scroll all wordle boxes to show the most recent guess
+     * Since boxes use column-reverse, scrolling to top shows newest content
+     */
+    scrollBoxesToTop() {
+        const wordles = document.getElementsByClassName("wordle");
+        for (let i = 0; i < wordles.length; i++) {
+            // Smooth scroll to top to show the most recent guess
+            wordles[i].scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
     }
 }
