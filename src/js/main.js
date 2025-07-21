@@ -3,7 +3,7 @@ import { TicTacTordleGame } from './game.js';
 import { WordleGame } from './wordle-game.js';
 import { KeyboardHandler } from './keyboard.js';
 import { UIComponents } from './ui-components.js';
-import { applyMobileStyles, manageFocus } from './utils.js';
+import { applyMobileStyles, manageFocus, isMobile } from './utils.js';
 
 class TicTacTordleApp {
     constructor() {
@@ -44,8 +44,8 @@ class TicTacTordleApp {
         // Initialize random turn
         this.keyboardHandler.initializeRandomTurn();
 
-        // Focus on first input
-        if (inputKids.length > 0) {
+        // Focus on first input (but not on mobile to prevent keyboard popup)
+        if (inputKids.length > 0 && !isMobile) {
             inputKids[0].focus();
         }
 

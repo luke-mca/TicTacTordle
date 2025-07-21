@@ -12,3 +12,35 @@ body {
     justify-content: flex-start;
     height: 100vh;
 }
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+    /* Prevent zoom on input focus */
+    input, select, textarea {
+        font-size: 16px !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    /* Improve font rendering on mobile */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    /* Prevent text selection and tap highlights on mobile */
+    .row > button, .letter, .box {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Ensure proper font fallbacks on mobile */
+    * {
+        font-family: textFont, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    }
+}

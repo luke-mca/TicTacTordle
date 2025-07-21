@@ -15,16 +15,32 @@ export function emptyCheck(box) {
 // Apply mobile-specific styling
 export function applyMobileStyles() {
     if (isMobile) {
+        // Apply mobile title font
         const title = document.getElementById("title");
-        title.style.fontFamily = "mobileTitleFont";
-        
-        const root = document.querySelector(':root');
-        root.style.fontFamily = "textFont";
-        
+        if (title) {
+            title.style.fontFamily = "mobileTitleFont, Arial, sans-serif";
+        }
+
+        // Apply text font to body and common elements
+        document.body.style.fontFamily = "textFont, Arial, sans-serif";
+
+        // Apply font to keyboard buttons
         const buttons = document.querySelectorAll('.row>button');
         buttons.forEach((button) => {
-            button.style.fontFamily = "textFont";
+            button.style.fontFamily = "textFont, Arial, sans-serif";
         });
+
+        // Apply font to input fields
+        const inputs = document.querySelectorAll('.input');
+        inputs.forEach((input) => {
+            input.style.fontFamily = "textFont, Arial, sans-serif";
+        });
+
+        // Prevent zoom on input focus (common mobile issue)
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 // Wordle game logic
 import { wordCheck } from './words.js';
+import { isMobile } from './utils.js';
 
 export class WordleGame {
     constructor(mainGame) {
@@ -19,7 +20,10 @@ export class WordleGame {
         for (let j = 0; j < 5; j++) {
             this.inputKids[j].value = "";
         }
-        this.inputKids[0].focus();
+        // Don't focus on mobile to prevent keyboard popup
+        if (!isMobile) {
+            this.inputKids[0].focus();
+        }
     }
 
     hardModeCheck(word) {
