@@ -437,6 +437,7 @@
                     word.appendChild(letter);
                 }
                 wordles[i].insertBefore(word, wordles[i].firstChild);
+                wordles[i].scrollTop = 0;
                 if (((wordles[i].parentElement.style.border) == "8px solid var(--red)" || (wordles[i].parentElement.style.border) == "8px solid var(--blue)")) {
                     wordles[i].firstChild.style.display = "none";
                 }

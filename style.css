@@ -216,6 +216,7 @@ button:active {
     align-items: stretch;
     overflow-y: scroll;
     scrollbar-width: none;
+    scroll-behavior: smooth;
     -ms-overflow-style: none;
 }
 
