@@ -4,89 +4,820 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TicTacTordle</title>
-    <meta name="description" content="A combination of Tic Tac Toe and Wordle - play Wordle in 9 boxes simultaneously to win 3 in a row!">
-    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1447600906908117"
+     crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="main">
-        <header>
-            <div id="title">TicTacTordle</div>
-            <div id="top-right-box">
-                <button class="icon" id="HELP">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
-                    </svg>
-                </button>
-                <button class="icon" id="SETTINGS">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
-                    </svg>
-                </button>
-                <button id="new-game">New Game</button>
-            </div>
-        </header>
-
-        <div id="body">
-            <div id="game-body">
-                <div class="box"><div class="wordle"></div></div>
-                <div class="box"><div class="wordle"></div></div>
-                <div class="box"><div class="wordle"></div></div>
-                <div class="box"><div class="wordle"></div></div>
-                <div class="box"><div class="wordle"></div></div>
-                <div class="box"><div class="wordle"></div></div>
-                <div class="box"><div class="wordle"></div></div>
-                <div class="box"><div class="wordle"></div></div>
-                <div class="box"><div class="wordle"></div></div>
-            </div>
+<div id="main">
+    <header id="header">
+        <div id="title">TicTacTordle</div>
+        <div id="top-right-box">
+            <button class="icon" id="HELP">
+                <svg fill="#000000" width="800px" height="800px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                <path d="M512 64a448 448 0 1 1 0 896 448 448 0 0 1 0-896zm23.744 191.488c-52.096 0-92.928 14.784-123.2 44.352-30.976 29.568-45.76 70.4-45.76 122.496h80.256c0-29.568 5.632-52.8 17.6-68.992 13.376-19.712 35.2-28.864 66.176-28.864 23.936 0 42.944 6.336 56.32 19.712 12.672 13.376 19.712 31.68 19.712 54.912 0 17.6-6.336 34.496-19.008 49.984l-8.448 9.856c-45.76 40.832-73.216 70.4-82.368 89.408-9.856 19.008-14.08 42.24-14.08 68.992v9.856h80.96v-9.856c0-16.896 3.52-31.68 10.56-45.76 6.336-12.672 15.488-24.64 28.16-35.2 33.792-29.568 54.208-48.576 60.544-55.616 16.896-22.528 26.048-51.392 26.048-86.592 0-42.944-14.08-76.736-42.24-101.376-28.16-25.344-65.472-37.312-111.232-37.312zm-12.672 406.208a54.272 54.272 0 0 0-38.72 14.784 49.408 49.408 0 0 0-15.488 38.016c0 15.488 4.928 28.16 15.488 38.016A54.848 54.848 0 0 0 523.072 768c15.488 0 28.16-4.928 38.72-14.784a51.52 51.52 0 0 0 16.192-38.72 51.968 51.968 0 0 0-15.488-38.016 55.936 55.936 0 0 0-39.424-14.784z"/></svg>
+            </button>
+            <button class="icon" id="SETTINGS">
+                <svg fill="#000000" width="800px" height="800px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1703.534 960c0-41.788-3.84-84.48-11.633-127.172l210.184-182.174-199.454-340.856-265.186 88.433c-66.974-55.567-143.323-99.389-223.85-128.415L1158.932 0h-397.78L706.49 269.704c-81.43 29.138-156.423 72.282-223.962 128.414l-265.073-88.32L18 650.654l210.184 182.174C220.39 875.52 216.55 918.212 216.55 960s3.84 84.48 11.633 127.172L18 1269.346l199.454 340.856 265.186-88.433c66.974 55.567 143.322 99.389 223.85 128.415L761.152 1920h397.779l54.663-269.704c81.318-29.138 156.424-72.282 223.963-128.414l265.073 88.433 199.454-340.856-210.184-182.174c7.793-42.805 11.633-85.497 11.633-127.285m-743.492 395.294c-217.976 0-395.294-177.318-395.294-395.294 0-217.976 177.318-395.294 395.294-395.294 217.977 0 395.294 177.318 395.294 395.294 0 217.976-177.317 395.294-395.294 395.294" fill-rule="evenodd"/></svg>
+            </button>
+            <button id="new-game">New Game</button>
         </div>
-
-        <div id="keys">
-            <div id="input-box">
-                <input class="input" maxlength="1" type="text">
-                <input class="input" maxlength="1" type="text">
-                <input class="input" maxlength="1" type="text">
-                <input class="input" maxlength="1" type="text">
-                <input class="input" maxlength="1" type="text">
+    </header>
+    
+    <div id="body">
+        <div id="game-body">
+            <div class="box">
+                <div class="wordle"></div>
             </div>
-            <div class="row">
-                <button>Q</button>
-                <button>W</button>
-                <button>E</button>
-                <button>R</button>
-                <button>T</button>
-                <button>Y</button>
-                <button>U</button>
-                <button>I</button>
-                <button>O</button>
-                <button>P</button>
+            <div class="box">
+                <div class="wordle"></div>
             </div>
-            <div class="row">
-                <button>A</button>
-                <button>S</button>
-                <button>D</button>
-                <button>F</button>
-                <button>G</button>
-                <button>H</button>
-                <button>J</button>
-                <button>K</button>
-                <button>L</button>
+            <div class="box">
+                <div class="wordle"></div>
             </div>
-            <div class="row">
-                <button class="spec-key">ENTER</button>
-                <button>Z</button>
-                <button>X</button>
-                <button>C</button>
-                <button>V</button>
-                <button>B</button>
-                <button>N</button>
-                <button>M</button>
-                <button class="spec-key">
-                    <img src="assets/icons/backspace-svgrepo-com.svg" alt="Delete" id="deleteSVG">
-                </button>
+            <div class="box">
+                <div class="wordle"></div>
+            </div>
+            <div class="box">
+                <div class="wordle"></div>
+            </div>
+            <div class="box">
+                <div class="wordle"></div>
+            </div>
+            <div class="box">
+                <div class="wordle"></div>
+            </div>
+            <div class="box">
+                <div class="wordle"></div>
+            </div>
+            <div class="box">
+                <div class="wordle"></div>
             </div>
         </div>
     </div>
+    <div id="keys">
+        <div id="input-box">
+            <input type="text" class="input" maxlength="1" inputmode="none">
+            <input type="text" class="input" maxlength="1" inputmode="none">
+            <input type="text" class="input" maxlength="1" inputmode="none">
+            <input type="text" class="input" maxlength="1" inputmode="none">
+            <input type="text" class="input" maxlength="1" inputmode="none">
+        </div>
+        <div class="row">
+            <button>Q</button>
+            <button>W</button>
+            <button>E</button>
+            <button>R</button>
+            <button>T</button>
+            <button>Y</button>
+            <button>U</button>
+            <button>I</button>
+            <button>O</button>
+            <button>P</button>
+        </div>
+        <div class="row">
+            <button>A</button>
+            <button>S</button>
+            <button>D</button>
+            <button>F</button>
+            <button>G</button>
+            <button>H</button>
+            <button>J</button>
+            <button>K</button>
+            <button>L</button>
+        </div>
+        <div class="row">
+            <button class="spec-key" id="enter">ENTER</button>
+            <button>Z</button>
+            <button>X</button>
+            <button>C</button>
+            <button>V</button>
+            <button>B</button>
+            <button>N</button>
+            <button>M</button>
+            <button class="spec-key" id="deleteButton">
+                <svg id="deleteSVG" fill="#000000" height="800px" width="800px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 44.18 44.18" xml:space="preserve">
+                <g>
+                    <path d="M10.625,5.09L0,22.09l10.625,17H44.18v-34H10.625z M42.18,37.09H11.734l-9.375-15l9.375-15H42.18V37.09z"/>
+                    <polygon points="18.887,30.797 26.18,23.504 33.473,30.797 34.887,29.383 27.594,22.09 34.887,14.797 33.473,13.383 26.18,20.676 18.887,13.383 17.473,14.797 24.766,22.09 17.473,29.383 	"/>
+                </g>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
 
-    <script type="module" src="src/js/main.js"></script>
+<script src="script.js"></script>
+<script>
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if(isMobile) {
+        let title = document.getElementById("title");
+        title.style.fontFamily = "mobileTitleFont";
+        let root = document.querySelector(':root');
+        root.style.fontFamily = "textFont";
+        let buttons = document.querySelectorAll('.row>button');
+        buttons.forEach((butt) => {
+            butt.style.fontFamily = "textFont";
+        });
+    }
+
+    let inputKids = document.getElementsByClassName("input");
+    inputKids[0].focus();
+    let main = document.getElementById("main");
+    document.addEventListener("keydown", (event) => {
+        let inputFocus = 1;
+        for (let i = 0; i < 5; i++) {
+            if (inputKids[i] == document.activeElement) {
+                inputFocus = 0;
+            }
+        }
+        if (inputFocus) {
+            for (let i = 0; i < 5; i++) {
+                // inputKids[i] == document.activeElement && 
+                if (inputKids[i].value == "") {
+                    inputKids[i].focus();
+                    i = i+5;
+                    inputFocus = 0;
+                }
+            }
+            if (inputFocus) {
+                inputKids[4].focus();
+            }
+        }
+    });
+
+    function emptyCheck(box) {
+        if (box.textContent == "X" || box.textContent == "O") {return false}
+        else {
+            return true;
+        };
+    };
+
+    let game = {
+        board: [["", "", ""],["", "", ""],["", "", ""]],
+
+        words: [[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()],[randomWord(), randomWord(), randomWord()]],
+
+        turn: 0,
+        
+        done: false,
+
+        click(box, i) {
+            if ((game.turn%2) == 0 && emptyCheck(box)) {
+                box.parentElement.style.border = "8px solid var(--red)";
+                box.parentElement.style.boxShadow = "0px 0px 0px var(--darkgray)";
+                game.board[Math.floor(i/3)][Math.floor(i%3)] = player1.mark;
+                game.winCheck(player1.mark);
+                game.words[Math.floor(i/3)][Math.floor(i%3)] = ".....";
+            };
+            if ((game.turn%2) == 1 && emptyCheck(box)) {
+                box.parentElement.style.border = "8px solid var(--blue)";
+                box.parentElement.style.boxShadow = "0px 0px 0px var(--darkgray)";
+                game.board[Math.floor(i/3)][Math.floor(i%3)] = player2.mark;
+                game.winCheck(player2.mark);
+                game.words[Math.floor(i/3)][Math.floor(i%3)] = ".....";
+            };     
+        },
+
+        winCheck(mark) {
+            if (game.turn < 4) return false;
+            if (game.board[0][0] == mark && game.board[0][1] == mark && game.board[0][2] == mark) {game.win(mark)}
+            else if (game.board[1][0] == mark && game.board[1][1] == mark && game.board[1][2] == mark) {game.win(mark)}
+            else if (game.board[2][0] == mark && game.board[2][1] == mark && game.board[2][2] == mark) {game.win(mark)}
+            else if (game.board[0][0] == mark && game.board[1][0] == mark && game.board[2][0] == mark) {game.win(mark)}
+            else if (game.board[0][1] == mark && game.board[1][1] == mark && game.board[2][1] == mark) {game.win(mark)}
+            else if (game.board[0][2] == mark && game.board[1][2] == mark && game.board[2][2] == mark) {game.win(mark)}
+            else if (game.board[0][0] == mark && game.board[1][1] == mark && game.board[2][2] == mark) {game.win(mark)}
+            else if (game.board[0][2] == mark && game.board[1][1] == mark && game.board[2][0] == mark) {game.win(mark)}
+            else if (game.board[0][0] != "" && game.board[0][1] != "" && game.board[0][2] != "" && game.board[1][0] != "" && game.board[1][1] != "" && game.board[1][2] != "" && game.board[2][0] != "" && game.board[2][1] != "" && game.board[2][2] != "") {game.win("tie")}
+        },
+
+        win(player) {
+            game.click = null;
+            if (isMobile) {
+                let main = document.getElementById("main");
+                let winDisplay = document.createElement("div");
+                winDisplay.setAttribute("id", "win");
+                if (player == "tie") {winDisplay.textContent = ("Tie Game")}
+                if (player == "X") {
+                    winDisplay.textContent = "Red Wins!";
+                    winDisplay.style.borderColor = "var(--red)";
+                }
+                if (player == "O") {
+                    winDisplay.textContent = "Blue Wins!";
+                    winDisplay.style.borderColor = "var(--blue)";
+                }
+                if (player == "X") {player1.wins += 1};
+                if (player == "O") {player2.wins += 1};
+
+                let X = document.createElement("button");
+                X.innerHTML = "<svg fill=\"#000000\" height=\"800px\" width=\"800px\" version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 460.775 460.775\" xml:space=\"preserve\"><path d=\"M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z\"/></svg>";
+                X.setAttribute("class", "X");
+                X.addEventListener("click", () => {
+                    winDisplay.remove();
+                })
+                winDisplay.appendChild(X);
+                let newGame0 = document.createElement("button");
+                newGame0.innerHTML = "New Game";
+                newGame0.addEventListener("click", () => {
+                    location.reload();
+                })
+                winDisplay.appendChild(newGame0);
+                main.appendChild(winDisplay)
+            }
+            else {
+                let main = document.getElementById("header");
+                let winDisplay = document.createElement("div");
+                winDisplay.setAttribute("id", "win-non-mobile");
+                if (player == "tie") {winDisplay.textContent = ("Tie Game")}
+                if (player == "X") {
+                    winDisplay.textContent = "Red Wins!";
+                    winDisplay.style.borderColor = "var(--red)";
+                }
+                if (player == "O") {
+                    winDisplay.textContent = "Blue Wins!";
+                    winDisplay.style.borderColor = "var(--blue)";
+                }
+                if (player == "X") {player1.wins += 1};
+                if (player == "O") {player2.wins += 1};
+                main.insertBefore(winDisplay, main.childNodes[2]);
+            }
+            game.done = true;
+            let wordles = document.getElementsByClassName("wordle");
+            for (let i=0; i<9; i++) {
+                let wordle = wordles[i];
+                let word = wordle.childNodes[0];
+                if (game.board[Math.floor(i/3)][Math.floor(i%3)] == "") {
+                    for (let j=0; j<5; j++) {
+                    word.childNodes[j].innerHTML = (game.words[Math.floor(i/3)][Math.floor(i%3)])[j];
+                    word.childNodes[j].style.backgroundColor = "rgb(106, 170, 100)";
+                    word.childNodes[j].style.border = "1px solid rgb(106, 170, 100)";
+                    word.childNodes[j].style.color = "var(--white)";
+                    }
+                }
+            }
+        }
+    };
+    let player1 = Object.assign({
+        mark: "X", 
+        wins: 0,
+    }, game);
+
+    let player2 = Object.assign({
+        mark: "O", 
+        wins: 0,
+    }, game);
+    
+    let boxes = document.getElementsByClassName("wordle");
+    for (let i = 0; i < 9; i++) {
+        row = document.createElement("div");
+        row.setAttribute("class", "word a");
+        for (let j=0; j<5; j++) {
+            letter = document.createElement("div");
+            letter.setAttribute("maxlength", "1");
+            letter.setAttribute("class", "letter");
+            row.appendChild(letter);
+        }
+        boxes[i].appendChild(row);
+    }
+    var newGame = document.getElementById("new-game");
+    newGame.addEventListener("click", () => {
+        location.reload();
+    })
+
+    let wordleGame = {
+        hardMode: {
+            active: 0,
+
+            boxClicked: null,
+        },
+
+        guesses: [""],
+        
+        rowNum: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+        currentGuess: 0,
+
+        clearInput() {
+            for(let j=0; j<5; j++) {
+                inputKids[j].value = "";
+            }
+            inputKids[0].focus();
+        },
+
+        hardModeCheck(word) {
+            if (wordleGame.currentGuess == 0) {
+                return true;
+            }
+            if (wordleGame.hardMode.boxClicked == null) {
+                inputBox.setAttribute("class", "wrong");
+                setTimeout(() => {inputBox.setAttribute("class", "")}, 200);
+                return false;
+            }
+            else {
+                let greenLetters = ["","","","",""];
+                let greenLettersCount = 0;
+                let neededLetters = ["","","","",""];
+                let neededLettersCount = 0;
+                let noLetters = ["","","","","","","","","","","","","","","","","","","","",""];
+                let noLettersCount = 0;
+                let hardRows = document.getElementsByClassName("row");
+                for (let i=0; i<hardRows.length; i++) {
+                    let hardRowLetters = hardRows[i].childNodes;
+                    for (let j=1; j<hardRowLetters.length;j=j+2) {
+                        if(hardRowLetters[j].style.backgroundColor == "rgb(106,170,100)") {
+                            //green
+                            greenLetters[greenLettersCount] = hardRowLetters[j].textContent;
+                            greenLettersCount++;
+                        };
+                        if(hardRowLetters[j].style.backgroundColor == "rgb(201,180,88)") {
+                            //yellow
+                            neededLetters[neededLettersCount] = hardRowLetters[j].textContent;
+                            neededLettersCount++;
+                        }
+                        if(hardRowLetters[j].style.backgroundColor == "var(--darkgray)") {
+                            noLetters[noLettersCount] = hardRowLetters[j].textContent;
+                            noLettersCount++;
+                        }
+                    }
+                }
+                // console.log(greenLetters);
+                // console.log(neededLetters);
+                // console.log(noLetters);
+                return true;
+            }       
+        },
+
+        updateBoxes() {
+            let tempEnteredWord = "";
+            let rows = document.getElementsByClassName("row");
+            for (let p=0; p<5; p++) {
+                tempEnteredWord += inputKids[p].value;
+            };
+            enteredWord = tempEnteredWord.toLowerCase();
+            if (wordleGame.hardMode.active) {
+                if(!wordleGame.hardModeCheck(enteredWord)) {
+                    return false;
+                };
+            };
+            if (!wordCheck(enteredWord)) {
+                return false;
+            }
+            //change color of boxes
+            for (let p=0; p<5; p++) {
+                for (let i=0; i<3; i++) {
+                    let row = rows[i];
+                    for (let j=1; j<row.childNodes.length; j += 2) {
+                        if ((inputKids[p].value).toLowerCase() == (row.childNodes[j].innerHTML).toLowerCase()) {
+                            row.childNodes[j].style.backgroundColor = "var(--darkgray)";
+                            row.childNodes[j].style.color = "white";
+                        }
+                    }
+                }
+            };
+            let wordles = document.getElementsByClassName("wordle");
+            let words = document.getElementsByClassName(wordleGame.rowNum[wordleGame.currentGuess]);
+            for (let i=0; i<9; i++) {
+                let tempWord = game.words[Math.floor(i/3)][Math.floor(i%3)];
+                // let greenTempWord = tempWord;
+                let correctCounter = 0;
+                // for(let j=0; j<5; j++) {
+                //     words[i].childNodes[j].innerHTML = inputKids[j].value;
+                //     words[i].childNodes[j].setAttribute("class","letter guessed")
+                //     if (tempWord[j] == (inputKids[j].value).toLowerCase()) {
+                //         tempWord = tempWord.substring(0, j) + "." + tempWord.substring(j+1);
+                //     }
+                // }
+                let greenLetters = ["", "", "", "", ""]
+                for(let j=0; j<5; j++) {
+                    words[i].childNodes[j].innerHTML = inputKids[j].value;
+                    words[i].childNodes[j].setAttribute("class","letter guessed")
+                    if (tempWord[j] == (inputKids[j].value).toLowerCase()) {
+                        greenLetters[j] = ".";
+                        tempWord = tempWord.substring(0, j) + "." + tempWord.substring(j+1);
+                        words[i].childNodes[j].style.backgroundColor = "rgb(106, 170, 100)";
+                        words[i].childNodes[j].style.border = "1px solid rgb(106, 170, 100)";
+                        correctCounter += 1;
+                    }
+                }
+                for(let p=0; p<5; p++) {
+                    for (let k=0; k<5; k++) {
+                        if (k != p && greenLetters[p] == "") {
+                            if (tempWord[k] == (inputKids[p].value).toLowerCase()) {
+                                tempWord = tempWord.substring(0, k) + "." + tempWord.substring(k+1);
+                                words[i].childNodes[p].style.backgroundColor = "rgb(201, 180, 88)";
+                                words[i].childNodes[p].style.border = "1px solid rgb(201, 180, 88)";
+                                k = k+5;
+                            };
+                        };
+                    }
+                }
+                if (wordleGame.hardMode.boxClicked != null) {
+                    updateKeyboard(wordleGame.hardMode.boxClicked);
+                }
+                //check if win
+                if (correctCounter == 5) {
+                    game.click(wordles[i], i);
+                    if(game.done) {
+                        return;
+                    }
+                }
+                correctCounter = 0;
+            }
+            wordleGame.currentGuess += 1;
+            let rowID = wordleGame.rowNum[wordleGame.currentGuess];
+            for (i=0; i<9; i++) {
+                let word = document.createElement("div");
+                word.setAttribute("class", "word "+rowID);
+                for (j=0; j<5; j++) {
+                    let letter = document.createElement("div");
+                    letter.setAttribute("class", "letter");
+                    letter.setAttribute("maxlength", "1");
+                    word.appendChild(letter);
+                }
+                wordles[i].insertBefore(word, wordles[i].firstChild);
+                if (((wordles[i].parentElement.style.border) == "8px solid var(--red)" || (wordles[i].parentElement.style.border) == "8px solid var(--blue)")) {
+                    wordles[i].firstChild.style.display = "none";
+                }
+            }
+            wordleGame.clearInput();
+            game.turn += 1;
+            if (game.turn%2 == 0) {inputBox.style.border = "4px solid var(--red)"}
+            else {inputBox.style.border = "4px solid var(--blue)"};
+        },
+    }
+
+    if ((Math.random()*2) > 1 ) {
+        inputBox.style.border = "4px solid var(--blue)";
+        game.turn += 1;
+    };
+
+    //KEYBOARD
+    // let enter = document.getElementById("enter");
+    // enter.addEventListener("click", () => {
+    //     wordleGame.updateBoxes();
+    //     console.log("1 click");
+    // })
+    
+    for (let i=0; i<4;i++) {
+        inputKids[i].addEventListener("keydown" , () => {
+            if (event.key == "Enter") {return false};
+            if (event.key == "Backspace") {return false};
+            if (event.key == "Tab") {return false};
+            let tempNum = inputKids[i].value.charCodeAt(0);
+            if ((tempNum < 91 & tempNum > 64) || (tempNum < 123 & tempNum > 96)) {
+                inputKids[i+1].focus();
+            }
+        })
+    }
+    for (let i=0; i<5;i++) {
+        inputKids[i].addEventListener("keyup" , () => {
+            if (event.key == "Enter") {
+                wordleGame.updateBoxes()
+            };
+        })
+    }
+    for (let i=1; i<5;i++) {
+        inputKids[i].addEventListener("keydown" , () => {
+            if (event.key == "Backspace") {
+                if (inputKids[i].value == "") {
+                    inputKids[i-1].focus();
+                }
+            }
+        })
+    }
+    inputKids[4].addEventListener("keydown" , () => {
+        if (event.key == "Backspace" && inputKids[4].value == "") {
+            inputKids[3].focus();
+        }
+    })
+
+    let keyParents = document.getElementsByClassName("row");
+    for (let i=0; i<3; i++) {
+        let row = keyParents[i].childNodes;
+        for(let j=1; j<row.length; j += 2) {
+            row[j].addEventListener("click", () => {
+                var letterBox;
+                var letterBoxNum;
+                for (let k=0; k<5; k++) {
+                    if (inputKids[k].value == "") {
+                        letterBox = inputKids[k];
+                        letterBoxNum = k;
+                        k += 5;
+                    }
+                    else {letterBoxNum = 5};
+                }
+                if (i==2 && j==1) {
+                    wordleGame.updateBoxes();
+                }
+                else if (i==2 && j==17) {
+                    if (inputKids[letterBoxNum-1] != undefined) {inputKids[letterBoxNum-1].value = ""};
+                }
+                else {
+                    if (letterBox != undefined) {letterBox.value = row[j].innerHTML};
+                };
+            });
+        };
+    };
+
+    // click box, updates letters (green, yellow);
+    function updateKeys(letter, color) {
+        for (let i=0; i<3; i++) {
+            let row = keyParents[i].childNodes;
+            for(let j=1; j<row.length; j += 2) {
+                if (row[j].innerHTML == (letter.toUpperCase())) {
+                    // if (!(color == "rgb(201, 180, 88)" && row[j].style.backgroundColor == "rgb(106, 170, 100)")) {
+                    //     row[j].style.backgroundColor = color;
+                    //     console.log("2: " + row[j].innerHTML + " " + color);
+                    // }
+                    //need to make check for if box is yellow and color is gray
+                    if (color == "var(--darkgray)") {
+                        if (!(row[j].style.backgroundColor == "rgb(201, 180, 88)" || row[j].style.backgroundColor == "rgb(106, 170, 100)")) {
+                            row[j].style.backgroundColor = color;
+                        }
+                    }
+                    if (color == "rgb(201, 180, 88)") { //yellow
+                        if (!(row[j].style.backgroundColor == "rgb(106, 170, 100)")) {
+                            row[j].style.backgroundColor = color;
+                        }
+                    }
+                    if (color == "rgb(106, 170, 100)") { //yellow
+                        row[j].style.backgroundColor = color;
+                    }
+                }
+            }
+        }
+    };
+    function resetKeys() {
+        for (let i=0; i<3; i++) {
+            let row = keyParents[i].childNodes;
+            for(let j=1; j<row.length; j += 2) {
+                    row[j].style.backgroundColor = "var(--gray)";
+            }
+        }
+    };
+    function updateKeyboard(box) {
+        if (box.parentElement.style.backgroundColor != "") {
+                let words = box.childNodes;
+                for (let p=0; p<words.length; p++) {
+                    let letters0 = words[p].childNodes;
+                    for (let q=0; q<5; q++) {
+                        if (letters0[q].style.backgroundColor == "rgb(106, 170, 100)") {
+                            updateKeys(letters0[q].innerHTML, "rgb(106, 170, 100)");
+                        }
+                    }
+                }
+            }
+            let kids = box.childNodes;
+            for (let j=0; j<kids.length; j++) {
+                let letters = kids[j].childNodes;
+                for (let k=0; k<5; k++) {
+                    if (letters[k].style.backgroundColor == "rgb(201, 180, 88)") {
+                        updateKeys(letters[k].innerHTML, "rgb(201, 180, 88)");
+                    }
+                    else if (letters[k].style.backgroundColor == "") {
+                        updateKeys(letters[k].innerHTML, "var(--darkgray)");
+                    }
+                }
+            }
+            for (let j=0; j<kids.length; j++) {
+                let letters = kids[j].childNodes;
+                for (let k=0; k<5; k++) {
+                    if (letters[k].style.backgroundColor == "rgb(106, 170, 100)") {
+                        updateKeys(letters[k].innerHTML, "rgb(106, 170, 100)");
+                    }
+                }
+            }
+    };
+
+    let realBoxes = document.getElementsByClassName("box");
+    for (let i=0; i<9; i++) {
+        realBoxes[i].addEventListener("click", () => {
+            //hard mode click
+            for (let j=0; j<9; j++) {
+                realBoxes[j].style.boxShadow = "0px 0px 0px var(--darkgray)";
+            }
+            wordleGame.hardMode.boxClicked = boxes[i];
+            if (realBoxes[i].style.border != "8px solid var(--red)" && realBoxes[i].style.border != "8px solid var(--blue)") {
+                switch(i) {
+                case 0:
+                    realBoxes[i].style.boxShadow = "-6px -6px 0px -4px var(--darkgray) inset";
+                    break;
+                case 1:
+                    realBoxes[i].style.boxShadow = "-6px -6px 0px -4px var(--darkgray) inset, 6px -4px 0px -4px var(--darkgray) inset";
+                    break;
+                case 2:
+                    realBoxes[i].style.boxShadow = "6px -6px 0px -4px var(--darkgray) inset";
+                    break;
+                case 3:
+                    realBoxes[i].style.boxShadow = "-6px -6px 0px -4px var(--darkgray) inset, -4px 6px 0px -4px var(--darkgray) inset";
+                    break;
+                case 4:
+                    realBoxes[i].style.boxShadow = "-6px -6px 0px -4px var(--darkgray) inset, 6px 6px 0px -4px var(--darkgray) inset";
+                    break;
+                case 5:
+                    realBoxes[i].style.boxShadow = "6px -6px 0px -4px var(--darkgray) inset, 4px 6px 0px -4px var(--darkgray) inset";
+                    break;
+                case 6:
+                    realBoxes[i].style.boxShadow = "-6px 6px 0px -4px var(--darkgray) inset";
+                    break;
+                case 7:
+                    realBoxes[i].style.boxShadow = "-6px 6px 0px -4px var(--darkgray) inset, 6px 4px 0px -4px var(--darkgray) inset";
+                    break;
+                case 8:
+                    realBoxes[i].style.boxShadow = "6px 6px 0px -4px var(--darkgray) inset";
+                    break;
+            }
+            }
+            //end hard mode click
+            resetKeys();
+            updateKeyboard(boxes[i]);
+        })
+    }
+    let displayMode = "light";
+    //settings and help
+    let settingsExist = 0;
+    let helpExist = 0;
+    let settingsButton = document.getElementById("SETTINGS");
+    settingsButton.addEventListener("click", () => {
+        let delSet = document.getElementsByClassName("settings");
+        for (let i=0; i < delSet.length; i++) {
+            delSet[i].remove();
+        }
+        if(settingsExist) {
+            settingsExist = 0;
+            helpExist = 0;
+        }
+        else {
+            settingsExist = 1;
+            let main = document.getElementById("main");
+            let settingsDisplay = document.createElement("div");
+            settingsDisplay.setAttribute("class", "settings");
+            if (isMobile) {
+                settingsDisplay.style.width = "min(40vw, 400px)";
+                settingsDisplay.style.height = "40vh";
+                settingsDisplay.style.fontWeight = "400";
+            }
+
+            let settingsTitle = document.createElement("div");
+
+            settingsTitle.textContent = "Settings";
+            settingsTitle.setAttribute("class", "setTitle");
+            settingsTitle.style.fontWeight = 600;
+            settingsDisplay.appendChild(settingsTitle);
+
+            let switchHardDiv = document.createElement("div");
+            switchHardDiv.setAttribute("class", "settings-main");
+            let switchHardDivText = document.createElement("div");
+            switchHardDivText.textContent = "Hard Mode"
+            let switchHardMode = document.createElement("label");
+            switchHardMode.setAttribute("class", "switch");
+            let switchHardType = document.createElement("input");
+            if (wordleGame.hardMode.active) {
+                switchHardType.setAttribute("checked", "true");
+            }
+            switchHardType.addEventListener("click", () => {
+                if (wordleGame.hardMode.active) {
+                    wordleGame.hardMode.active = 0;
+                }
+                else {
+                    wordleGame.hardMode.active = 1;
+                }
+            });
+
+            switchHardType.setAttribute("type", "checkbox");
+            let switchHardSpan = document.createElement("span");
+            switchHardSpan.setAttribute("class", "slider round");
+            switchHardMode.appendChild(switchHardType);
+            switchHardMode.appendChild(switchHardSpan);
+            switchHardDiv.appendChild(switchHardDivText);
+            switchHardDiv.appendChild(switchHardMode);
+    //LINE BELOW ADDS HARD MODE SLIDER
+            // settingsDisplay.appendChild(switchHardDiv);
+
+
+
+            //darkMode
+            let switchDiv = document.createElement("div");
+            switchDiv.setAttribute("class", "settings-main");
+            let switchDivText = document.createElement("div");
+            switchDivText.textContent = "Dark Mode"
+            let switchMode = document.createElement("label");
+            switchMode.setAttribute("class", "switch");
+            let switchType = document.createElement("input");
+            if (displayMode == "dark") {
+                switchType.setAttribute("checked", "true");
+            }
+            switchType.addEventListener("click", () => {
+                if (displayMode == "light") {
+                document.documentElement.style.setProperty("--SVGblack", "white");
+                document.documentElement.style.setProperty("--gray", "rgb(120, 124, 126)");
+                document.documentElement.style.setProperty("--darkgray", "rgb(80, 80, 80)");
+                document.documentElement.style.setProperty("--white", "rgb(50, 50, 50)");
+                document.documentElement.style.setProperty("--black", "white");
+                document.documentElement.style.setProperty("--red", "rgb(170, 0, 0)");
+                document.documentElement.style.setProperty("--blue", "rgb(0, 0, 170)");
+                displayMode = "dark";
+                }
+                else {
+                document.documentElement.style.setProperty("--SVGblack", "black");
+                document.documentElement.style.setProperty("--darkgray", "rgb(120, 124, 126)");
+                document.documentElement.style.setProperty("--gray", "rgb(211, 214, 218)");
+                document.documentElement.style.setProperty("--black", "black");
+                document.documentElement.style.setProperty("--white", "white");
+                document.documentElement.style.setProperty("--red", "rgb(241, 131, 131)");
+                document.documentElement.style.setProperty("--blue", "rgb(134, 134, 226)");
+                displayMode = "light";
+                }
+            });
+
+            switchType.setAttribute("type", "checkbox");
+            let switchSpan = document.createElement("span");
+            switchSpan.setAttribute("class", "slider round");
+            switchMode.appendChild(switchType);
+            switchMode.appendChild(switchSpan);
+            switchDiv.appendChild(switchDivText);
+            switchDiv.appendChild(switchMode);
+            settingsDisplay.appendChild(switchDiv);
+
+            let FeedBackDiv = document.createElement("div");
+            FeedBackDiv.setAttribute("class", "settings-main");
+            let FeedbackText = document.createElement("div");
+            let FeedbackLink = document.createElement("a");
+            FeedbackText.textContent = "Feedback";
+            FeedBackDiv.appendChild(FeedbackText);
+            FeedbackLink.setAttribute("href", "mailto:mcluke2004@gmail.com");
+            FeedbackLink.textContent = "Email";
+            FeedbackLink.style.textDecoration = "underline";
+            FeedBackDiv.appendChild(FeedbackLink);
+            settingsDisplay.appendChild(FeedBackDiv);
+
+            let X = document.createElement("button");
+            X.innerHTML = "<svg fill=\"#000000\" height=\"800px\" width=\"800px\" version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 460.775 460.775\" xml:space=\"preserve\"><path d=\"M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z\"/></svg>";
+            X.setAttribute("class", "X");
+            X.addEventListener("click", () => {
+                settingsDisplay.remove();
+                settingsExist = 0;
+            })
+            settingsDisplay.appendChild(X);
+            main.appendChild(settingsDisplay);
+        }
+    });
+    let helpButton = document.getElementById("HELP");
+    helpButton.addEventListener("click", () => {
+        let helpSet = document.getElementsByClassName("settings");
+        for (let i=0; i < helpSet.length; i++) {
+            helpSet[i].remove();
+        }
+        if(helpExist) {
+            helpExist = 0;
+            settingsExist = 0;
+        }
+        else {
+            helpExist = 1;
+            let main = document.getElementById("main");
+            let helpDisplay = document.createElement("div");
+            helpDisplay.setAttribute("class", "settings");
+
+            if (isMobile) {
+                helpDisplay.style.width = "min(50vw, 500px)";
+                helpDisplay.style.height = "50vh";
+                helpDisplay.style.fontWeight = "400";
+            }
+
+            let helpTitle = document.createElement("div");
+            helpTitle.textContent = "How To Play";
+            helpTitle.style.fontWeight = 900;
+            helpTitle.setAttribute("class", "setTitle");
+            helpDisplay.appendChild(helpTitle);
+
+            let helpDiv = document.createElement("div");
+            helpDiv.textContent = "Combination of popular games, Tic Tac Toe and Wordle. ";
+            helpDiv.setAttribute("class", "settings-main");
+            helpDisplay.appendChild(helpDiv);
+
+            let helpDiv2 = document.createElement("div");
+            helpDiv2.textContent = "Play Wordle in 9 boxes at the same time. ";
+            helpDiv2.setAttribute("class", "settings-main");
+            helpDisplay.appendChild(helpDiv2);
+
+            let helpDiv3 = document.createElement("div");
+            helpDiv3.textContent = "First to win 3 Wordles in a row wins, like Tic Tac Toe. ";
+            helpDiv3.setAttribute("class", "settings-main");
+            helpDisplay.appendChild(helpDiv3);
+
+            let X = document.createElement("button");
+            X.innerHTML = "<svg fill=\"#000000\" height=\"800px\" width=\"800px\" version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 460.775 460.775\" xml:space=\"preserve\"><path d=\"M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z\"/></svg>";
+            X.setAttribute("class", "X");
+            X.addEventListener("click", () => {
+                helpDisplay.remove();
+                helpExist = 0;
+            })
+            helpDisplay.appendChild(X);
+            main.appendChild(helpDisplay);
+        }
+    });
+</script>
 </body>
 </html>
